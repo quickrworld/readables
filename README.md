@@ -14,4 +14,4 @@ To get started right away:
     - `npm install`
     - `npm start`
 
-# Note: myworkdir can be any directory where you want to install the application.
+## Note: myworkdir can be any directory where you want to install the application.
