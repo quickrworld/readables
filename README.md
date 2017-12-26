@@ -13,3 +13,5 @@ To get started right away:
     - `cd frontend`
     - `npm install`
     - `npm start`
+
+# Note: myworkdir can be any directory where you want to install the application.
