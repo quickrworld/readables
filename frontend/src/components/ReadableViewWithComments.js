@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import {selectReadable, fetchReadable, deleteReadable} from "../actions"
+import {NavLink} from 'react-router-dom'
 import {withRouter} from "react-router-dom"
 import {connect} from "react-redux"
 import CommentsListView from './CommentsListView'
@@ -86,8 +87,27 @@ class ReadableViewWithComments extends Component {
           padding: '20px',
           textAlign: 'center',
           boxShadow: 'rgba(0,0,0,0.5) 0px 2px 4px 0px'}}>
-        {`Readable with id '${this.props.id}' has been deleted`}
-      </div>
+        <p style={{fontSize:'20px'}}>{`Readable with id '${this.props.id}' has been deleted`}</p>
+        <p><span>You could </span>
+          <span>
+            <NavLink to={{pathname: '/'}}
+              style={{textDecoration: 'none', color: 'rgba(47,61,72,1)'}}
+              activeStyle={{textDecoration: 'none'}}
+              onMouseEnter={this.handleMouseEnter}
+              onMouseLeave={this.handleMouseLeave}>browse other readables
+            </NavLink>
+          </span>
+          <span> and comment on them</span></p>
+        <p><span>Or you could even </span>
+          <span>
+            <NavLink to={{pathname: '/'}}
+                     style={{textDecoration: 'none', color: 'rgba(47,61,72,1)'}}
+                     activeStyle={{textDecoration: 'none'}}
+                     onMouseEnter={this.handleMouseEnter}
+                     onMouseLeave={this.handleMouseLeave}>write your own
+            </NavLink>
+          </span>
+        </p>      </div>
     }
     if (this.props.check === '404') {
       return <div
@@ -97,7 +117,28 @@ class ReadableViewWithComments extends Component {
           padding: '20px',
           textAlign: 'center',
           boxShadow: 'rgba(0,0,0,0.5) 0px 2px 4px 0px'}}>
-        {`Readable with id '${this.props.id}' not found`}
+        <p style={{fontSize:'20px'}}>{`Readable with id '${this.props.id}' not found`}</p>
+        <p><span>You could </span>
+          <span>
+            <NavLink to={{pathname: '/'}}
+              style={{textDecoration: 'none', color: 'rgba(47,61,72,1)'}}
+              activeStyle={{textDecoration: 'none'}}
+              onMouseEnter={this.handleMouseEnter}
+              onMouseLeave={this.handleMouseLeave}>browse other readables
+            </NavLink>
+          </span>
+          <span> and comment on them</span>
+        </p>
+        <p><span>Or you could even </span>
+          <span>
+            <NavLink to={{pathname: '/'}}
+                 style={{textDecoration: 'none', color: 'rgba(47,61,72,1)'}}
+                 activeStyle={{textDecoration: 'none'}}
+                 onMouseEnter={this.handleMouseEnter}
+                 onMouseLeave={this.handleMouseLeave}>write your own
+            </NavLink>
+          </span>
+        </p>
       </div>
     }
     return (
