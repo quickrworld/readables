@@ -1,9 +1,12 @@
 # Readable App
 
-To get started right away:
+To get started right away, choose an installation directory, for example, `installdir`.
 
-* Install the API server and readable app
-    - `cd myworkdir`
+* Create the installation directory
+    - `mkdir installdir`
+
+* Install the API server and readable app from the github repository
+    - `cd installdir`
     - `git clone https://github.com/quickrworld/readables.git`
 
 * Start the API server
@@ -11,10 +14,13 @@ To get started right away:
     - `npm install`
     - `node server`
     
-* In another terminal window, start the frontend app
-    - `cd myworkdir/readables`
+* In another terminal window, start the frontend app.
+    - change your working directory to the installation directory installdir. For example, if you created installdir in your home directory
+        - `cd ~/installdir`
+    - `cd installdir/readables`
     - `cd readables/frontend`
     - `npm install`
     - `npm start`
 
-### Note: myworkdir can be any directory where you want to install the application.
+### Note: installdir can be any directory where you want to install the frontend application and the API server.
+#### Note: If you use Windows these commands may have to be modified.
