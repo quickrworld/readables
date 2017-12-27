@@ -1,5 +1,7 @@
 # Readable App
 
+To learn more about the application take a look at the wiki pages at https://github.com/quickrworld/readables/wiki
+
 To get started right away, choose an installation directory, for example, `installdir`.
 
 * Create the installation directory
