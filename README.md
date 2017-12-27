@@ -1,22 +1,20 @@
-# Readable API Server
+# Readable App
 
-This is the starter project for the final assessment project for Udacity's Redux course where you will build a content and comment web app. Users will be able to post content to predefined categories, comment on their posts and other users' posts, and vote on posts and comments. Users will also be able to edit and delete posts and comments.
+To get started right away:
 
-This repository includes the code for the backend API Server that you'll use to develop and interact with the front-end portion of the project.
+* Install the API server and readable app
+    - `cd myworkdir`
+    - `git clone https://github.com/quickrworld/readables.git`
 
-## Start Developing
-
-To get started developing right away:
-
-* Install and start the API server
-    - `cd api-server`
+* Start the API server
+    - `cd readables/api-server`
     - `npm install`
     - `node server`
-* In another terminal window, use Create React App to scaffold out the front-end
-    - `create-react-app frontend`
-    - `cd frontend`
+    
+* In another terminal window, start the frontend app
+    - `cd myworkdir/readables`
+    - `cd readables/frontend`
+    - `npm install`
     - `npm start`
 
-## API Server
-
-Information about the API server and how to use it can be found in its [README file](api-server/README.md).
+### Note: myworkdir can be any directory where you want to install the application.
