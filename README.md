@@ -17,7 +17,6 @@ To get started right away, choose an installation directory, for example, `insta
 * In another terminal window, start the frontend app.
     - change your working directory to the installation directory installdir. For example, if you created installdir in your home directory
         - `cd ~/installdir`
-    - `cd installdir/readables`
     - `cd readables/frontend`
     - `npm install`
     - `npm start`
