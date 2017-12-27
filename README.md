@@ -22,5 +22,6 @@ To get started right away, choose an installation directory, for example, `insta
     - `npm install`
     - `npm start`
 
-#### Note: installdir can be any directory where you want to install the frontend application and the API server.
-#### Note: If you use Windows these commands may have to be modified.
+#### Note: `installdir` can be any directory where you want to install the frontend application and the API server
+#### Note: You must have write permissions in the working directory when you create `installdir`
+#### Note: Windows users may have to modify the commands for the Windows environment
