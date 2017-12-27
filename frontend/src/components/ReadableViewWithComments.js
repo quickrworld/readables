@@ -79,10 +79,26 @@ class ReadableViewWithComments extends Component {
       color: 'rgb(79, 79, 79)'
     }
     if(this.props.deleted === true) {
-      return <div>{`Readable with id '${this.props.id}' has been deleted`}</div>
+      return <div
+        style={{
+          border: '1px solid lightgray',
+          margin: '20px',
+          padding: '20px',
+          textAlign: 'center',
+          boxShadow: 'rgba(0,0,0,0.5) 0px 2px 4px 0px'}}>
+        {`Readable with id '${this.props.id}' has been deleted`}
+      </div>
     }
     if (this.props.check === '404') {
-      return <div>{`Readable with id '${this.props.id}' not found`}</div>
+      return <div
+        style={{
+          border: '1px solid lightgray',
+          margin: '20px',
+          padding: '20px',
+          textAlign: 'center',
+          boxShadow: 'rgba(0,0,0,0.5) 0px 2px 4px 0px'}}>
+        {`Readable with id '${this.props.id}' not found`}
+      </div>
     }
     return (
       <div>
