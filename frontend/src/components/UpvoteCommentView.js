@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import FaThumbsOUp from 'react-icons/lib/fa/thumbs-o-up'
-import {fetchCommentUpvote} from "../actions"
+import {upvoteComment} from "../actions"
 import {connect} from "react-redux"
 
 class UpvoteCommentView extends Component {
@@ -21,7 +21,7 @@ class UpvoteCommentView extends Component {
 
 function mapDispatchToProps(dispatch) {
   return {
-    upvoteComment: (id) => dispatch(fetchCommentUpvote(id))
+    upvoteComment: (id) => dispatch(upvoteComment(id))
   }
 }
 

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import FaThumbsODown from 'react-icons/lib/fa/thumbs-o-down'
-import {fetchCommentDownvote} from "../actions"
+import {downvoteComment} from "../actions"
 import {connect} from "react-redux"
 
 class DownvoteCommentView extends Component {
@@ -19,7 +19,7 @@ class DownvoteCommentView extends Component {
 
 function mapDispatchToProps(dispatch) {
   return {
-    downvoteComment: (id) => dispatch(fetchCommentDownvote(id))
+    downvoteComment: (id) => dispatch(downvoteComment(id))
   }
 }
 

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {selectReadable, fetchReadable} from "../actions"
+import {selectReadable, fetchReadable, deleteReadable} from "../actions"
 import {withRouter} from "react-router-dom"
 import {connect} from "react-redux"
 import CommentsListView from './CommentsListView'
@@ -30,10 +30,18 @@ class ReadableViewWithComments extends Component {
     event.target.style.color = 'rgba(255,255,255,.8)'
     event.target.style.borderRadius = '4px'
   }
+  handleMouseEnterDelete = (event) => {
+    event.target.style.backgroundColor = 'rgba(255,0,0,.8)'
+    event.target.style.color = 'rgba(255,255,255,.8)'
+    event.target.style.borderRadius = '4px'
+  }
   handleMouseLeave = (event) => {
     event.target.style.backgroundColor = 'rgb(255,255,255)'
     event.target.style.color = 'rgb(0,0,0)'
     event.target.style.borderRadius = '4px'
+  }
+  deleteReadable = () => {
+    this.props.deleteReadable(this.props.id)
   }
   render() {
     const topLineStyle = {
@@ -70,6 +78,12 @@ class ReadableViewWithComments extends Component {
       borderBottom: '1px solid lightgray',
       color: 'rgb(79, 79, 79)'
     }
+    if(this.props.deleted === true) {
+      return <div>{`Readable with id '${this.props.id}' has been deleted`}</div>
+    }
+    if (this.props.check === '404') {
+      return <div>{`Readable with id '${this.props.id}' not found`}</div>
+    }
     return (
       <div>
         <div className="top-line" style={topLineStyle}>
@@ -83,11 +97,18 @@ class ReadableViewWithComments extends Component {
             alignContent: 'center'}}>
             <span style={editIconStyle}>
               <button
+                onMouseEnter={this.handleMouseEnterDelete}
+                onMouseLeave={this.handleMouseLeave}
+                onClick={() => this.deleteReadable()}
+                style={{borderWidth: '0px'}}>
+                Delete
+              </button>
+              <button
                 onMouseEnter={this.handleMouseEnter}
                 onMouseLeave={this.handleMouseLeave}
                 onClick={() => this.openEditor()}
                 style={{borderWidth: '0px'}}>
-                Edit Readable
+                Edit
               </button>
             </span>
           </div>
@@ -159,15 +180,28 @@ function mapStateToProps(state, ownProps) {
     readableById[id] &&
     readableById[id].readable &&
     readableById[id].readable.body
-  const readable = readableById[id] && readableById[id].readable
-
-  return { id, title, author, category, body, voteScore, commentCount, timestamp, readable, readableById }
+  const deleted = readableById &&
+    readableById[id] &&
+    readableById[id].readable &&
+    readableById[id].readable.deleted
+  const readable = readableById && readableById[id] && readableById[id].readable
+  if(!readable) {
+    return { id, check: '404' }
+  }
+  if(readable && !readable.id) {
+    return { id, check: '404' }
+  }
+  if(deleted) {
+    return { id, deleted: true }
+  }
+  return { id, title, author, category, body, voteScore, commentCount, timestamp, readable, deleted, readableById }
 }
 
 function mapDispatchToProps(dispatch) {
   return {
     selectReadable: (id) => dispatch(selectReadable(id)),
     fetchReadable: (id) => dispatch(fetchReadable(id)),
+    deleteReadable: (id) => dispatch(deleteReadable(id)),
   }
 }
 

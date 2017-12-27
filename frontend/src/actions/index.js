@@ -46,25 +46,29 @@ export const SORT_COMMENTS_NEWEST = 'SORT_COMMENTS_NEWEST'
 export const SORT_COMMENTS_OLDEST = 'SORT_COMMENTS_OLDEST'
 export const SORT_COMMENTS_TOPVOTED = 'SORT_COMMENTS_TOPVOTED'
 
-export const FETCH_ADD_COMMENT = 'FETCH_ADD_COMMENT'
+export const FETCH_COMMENT_ADD_REQUEST = 'FETCH_COMMENT_ADD_REQUEST'
 export const FETCH_COMMENT_ADD_SUCCESS = 'FETCH_COMMENT_ADD_SUCCESS'
 export const FETCH_COMMENT_ADD_FAILURE = 'FETCH_COMMENT_ADD_FAILURE'
 
-export const FETCH_EDIT_COMMENT = 'FETCH_EDIT_COMMENT'
+export const FETCH_COMMENT_EDIT_REQUEST = 'FETCH_COMMENT_EDIT_REQUEST'
 export const FETCH_COMMENT_EDIT_SUCCESS = 'FETCH_COMMENT_EDIT_SUCCESS'
 export const FETCH_COMMENT_EDIT_FAILURE = 'FETCH_COMMENT_EDIT_FAILURE'
 
-export const FETCH_DELETE_COMMENT = 'FETCH_DELETE_COMMENT'
+export const FETCH_COMMENT_DELETE_REQUEST = 'FETCH_COMMENT_DELETE_REQUEST'
 export const FETCH_COMMENT_DELETE_SUCCESS = 'FETCH_COMMENT_DELETE_SUCCESS'
 export const FETCH_COMMENT_DELETE_FAILURE = 'FETCH_COMMENT_DELETE_FAILURE'
 
-export const FETCH_ADD_READABLE = 'FETCH_ADD_READABLE'
+export const FETCH_READABLE_ADD_REQUEST = 'FETCH_READABLE_ADD_REQUEST'
 export const FETCH_READABLE_ADD_SUCCESS = 'FETCH_READABLE_ADD_SUCCESS'
 export const FETCH_READABLE_ADD_FAILURE = 'FETCH_READABLE_ADD_FAILURE'
 
-export const FETCH_EDIT_READABLE = 'FETCH_EDIT_READABLE'
+export const FETCH_READABLE_EDIT_REQUEST = 'FETCH_READABLE_EDIT_REQUEST'
 export const FETCH_READABLE_EDIT_SUCCESS = 'FETCH_READABLE_EDIT_SUCCESS'
 export const FETCH_READABLE_EDIT_FAILURE = 'FETCH_READABLE_EDIT_FAILURE'
+
+export const FETCH_READABLE_DELETE_REQUEST = 'FETCH_READABLE_DELETE_REQUEST'
+export const FETCH_READABLE_DELETE_SUCCESS = 'FETCH_READABLE_DELETE_SUCCESS'
+export const FETCH_READABLE_DELETE_FAILURE = 'FETCH_READABLE_DELETE_FAILURE'
 
 // Categories
 export function fetchCategoriesRequest() {
@@ -289,7 +293,7 @@ export function fetchComments(readable) {
 }
 
 // readable upvote
-export function fetchReadableUpvote(id) {
+export function upvoteReadable(id) {
   return function (dispatch) {
     dispatch(fetchReadableUpvoteRequest(id))
     const url = `http://localhost:3001/posts/${id}`
@@ -346,7 +350,7 @@ export function fetchReadableUpvoteFailure(id, response) {
 }
 
 // readable downvote
-export function fetchReadableDownvote(id) {
+export function downvoteReadable(id) {
   return function (dispatch) {
     dispatch(fetchReadableDownvoteRequest(id))
     const url = `http://localhost:3001/posts/${id}`
@@ -403,7 +407,7 @@ export function fetchReadableDownvoteFailure(id, response) {
 }
 
 // comment upvote
-export function fetchCommentUpvote(id) {
+export function upvoteComment(id) {
   return function (dispatch) {
     dispatch(fetchCommentUpvoteRequest(id))
     const url = `http://localhost:3001/comments/${id}`
@@ -460,7 +464,7 @@ export function fetchCommentUpvoteFailure(id, response) {
 }
 
 // comment downvote
-export function fetchCommentDownvote(id) {
+export function downvoteComment(id) {
   return function (dispatch) {
     dispatch(fetchCommentDownvoteRequest(id))
     const url = `http://localhost:3001/comments/${id}`
@@ -556,7 +560,7 @@ export function sortCommentsTopvoted() {
 }
 
 // add comment
-export function fetchAddComment(data) {
+export function addComment(data) {
   return function(dispatch) {
     const url = 'http://localhost:3001/comments'
     const body = {
@@ -603,7 +607,7 @@ export function fetchCommentAddFailure(json) {
 }
 
 // edit comment
-export function fetchEditComment(data) {
+export function editComment(data) {
   return function(dispatch) {
     const url = `http://localhost:3001/comments/${data.id}`
     const body = {
@@ -648,7 +652,7 @@ export function fetchCommentEditFailure(json) {
 }
 
 // delete comment
-export function fetchDeleteComment(data) {
+export function deleteComment(data) {
   return function(dispatch) {
     const url = `http://localhost:3001/comments/${data.id}`
     const body = {
@@ -691,7 +695,7 @@ export function fetchCommentDeleteFailure(json) {
 }
 
 // add readable
-export function fetchAddReadable(data) {
+export function addReadable(data) {
   return function(dispatch) {
     const url = `http://localhost:3001/posts/`
     const body = {
@@ -739,7 +743,7 @@ export function fetchReadableAddFailure(json) {
 }
 
 // edit readable
-export function fetchEditReadable(data) {
+export function editReadable(data) {
   return function(dispatch) {
     const url = `http://localhost:3001/posts/${data.id}`
     const body = {
@@ -778,6 +782,49 @@ export function fetchReadableEditSuccess(json) {
 export function fetchReadableEditFailure(json) {
   return {
     type: FETCH_READABLE_EDIT_FAILURE,
+    error: json
+  }
+}
+
+// delete readable
+export function deleteReadable(id) {
+  return function(dispatch) {
+    const url = `http://localhost:3001/posts/${id}`
+    const body = {
+      id: id
+    }
+    return fetch(
+      url, {
+        method: 'DELETE',
+        body: JSON.stringify(body),
+        headers: {
+          'Content-Type': 'application/json',
+          'authorization': 'quickrworld',
+        }
+      }
+    )
+    .then(
+      response => { const json = response.json(); return json },
+      error => ({ 'error': error })
+    )
+    .then(
+      json => json['error']
+        ? dispatch(fetchReadableDeleteFailure(json))
+        : dispatch(fetchReadableDeleteSuccess(json))
+    )
+  }
+}
+
+export function fetchReadableDeleteSuccess(json) {
+  return {
+    type: FETCH_READABLE_DELETE_SUCCESS,
+    readable: json
+  }
+}
+
+export function fetchReadableDeleteFailure(json) {
+  return {
+    type: FETCH_READABLE_DELETE_FAILURE,
     error: json
   }
 }

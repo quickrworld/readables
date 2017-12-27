@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux'
-import {fetchAddComment} from '../actions'
-import {fetchEditComment} from '../actions'
+import {addComment} from '../actions'
+import {editComment} from '../actions'
 
 class CommentEditorView extends Component {
   constructor(props) {
@@ -123,8 +123,8 @@ class CommentEditorView extends Component {
 
 function mapDispatchToProps(dispatch) {
   return {
-    addComment: (data) => dispatch(fetchAddComment(data)),
-    editComment: (data) => dispatch(fetchEditComment(data))
+    addComment: (data) => dispatch(addComment(data)),
+    editComment: (data) => dispatch(editComment(data))
   }
 }
 

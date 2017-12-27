@@ -42,9 +42,11 @@ import {
   FETCH_COMMENT_DELETE_SUCCESS,
   FETCH_COMMENT_DELETE_FAILURE,
   FETCH_READABLE_ADD_SUCCESS,
-  // FETCH_READABLE_ADD_FAILURE,
+  FETCH_READABLE_ADD_FAILURE,
   FETCH_READABLE_EDIT_SUCCESS,
-  // FETCH_READABLE_EDIT_FAILURE
+  FETCH_READABLE_EDIT_FAILURE,
+  FETCH_READABLE_DELETE_SUCCESS,
+  FETCH_READABLE_DELETE_FAILURE,
 } from "../actions";
 
 // categories
@@ -126,6 +128,7 @@ function readables(state = {
   }
 }
 
+// readable
 function readable(state = {
   isFetching: false
 }, action) {
@@ -162,6 +165,8 @@ function readable(state = {
       let readableEditedState = Object.assign({}, state)
       readableEditedState.readable = Object.assign({}, action.readable)
       return readableEditedState
+    case FETCH_READABLE_EDIT_FAILURE:
+      return state
     default:
       return state
   }
@@ -210,6 +215,8 @@ function readableById(state = {
         readable: action.readable
       }
       return readableAddedState
+    case FETCH_READABLE_ADD_FAILURE:
+      return state
     case FETCH_READABLE_EDIT_SUCCESS:
       let readableEditedState = Object.assign({}, state)
       readableEditedState[action.readable.id] = {
@@ -218,6 +225,16 @@ function readableById(state = {
         readable: action.readable
       }
       return readableEditedState
+    case FETCH_READABLE_DELETE_SUCCESS:
+      let deletedReadableState = Object.assign({}, state)
+      console.log('deletedReadableState1', deletedReadableState)
+      delete deletedReadableState[action.readable.id].readable
+      deletedReadableState[action.readable.id].readable =
+        {id: action.readable.id, deleted: true, body: 'deleted!', category: action.readable.category}
+      console.log('deletedReadableState2', deletedReadableState)
+      return deletedReadableState
+    case FETCH_READABLE_DELETE_FAILURE:
+      return state
     default:
       return state
   }
@@ -277,10 +294,6 @@ function readablesByCategory(state = {
         readableAddedState['all'].items[action.readable.id] = action.readable
       }
       return readableAddedState
-    case 'a':
-      let editedState = Object.assign({}, state)
-      editedState[action.comment.parentId].items[action.comment.id] = action.comment
-      return editedState
     case FETCH_READABLE_EDIT_SUCCESS:
       let readableEditedState = Object.assign({}, state)
       if(readableEditedState[action.readable.category] &&
