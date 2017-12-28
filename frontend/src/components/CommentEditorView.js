@@ -9,7 +9,8 @@ class CommentEditorView extends Component {
     this.state = {
       id: props.id,
       author: props.author,
-      comment: props.story
+      comment: props.story,
+      errorMessage: ''
     }
   }
   handleMouseEnter = (event) => {
@@ -29,7 +30,15 @@ class CommentEditorView extends Component {
     this.setState({comment: event.target.value})
   }
   addComment = () => {
-    if(!this.state.author || !this.state.comment) {
+    if (!this.state.author || !this.state.comment) {
+      let errorMessage = ''
+      if(!this.state.author) {
+        errorMessage = errorMessage + 'Author is required.'
+      }
+      if(!this.state.comment) {
+        errorMessage = errorMessage + ' ' + 'Comment is required.'
+      }
+      this.setState({ errorMessage: errorMessage.trim() })
       return
     }
     this.props.addComment({
@@ -45,7 +54,15 @@ class CommentEditorView extends Component {
     }
   }
   editComment = () => {
-    if(!this.state.author || !this.state.comment) {
+    if (!this.state.author || !this.state.comment) {
+      let errorMessage = ''
+      if(!this.state.author) {
+        errorMessage = errorMessage + 'Author is required.'
+      }
+      if(!this.state.comment) {
+        errorMessage = errorMessage + ' ' + 'Comment is required.'
+      }
+      this.setState({ errorMessage: errorMessage.trim() })
       return
     }
     this.props.editComment({
@@ -116,6 +133,17 @@ class CommentEditorView extends Component {
             onClick={this.props.id ? this.editComment : this.addComment}
             style={{align:'right', borderWidth: '0px'}}>Comment</button>
         </div>
+        {this.state.errorMessage &&
+        <div style={{gridRow: '4', gridColumnStart: '1', padding: '0px, 6px, 0px, 6px', color: 'red'}}>
+          {this.state.errorMessage}
+          {this.state.errorMessage &&
+          <button style={{
+            fontSize: '14px',
+            alignContent: 'center',
+            border: '0px',
+            color: 'red'}}
+                  onClick={() => this.setState({errorMessage: ''})}>&#x24e7;</button>}
+        </div>}
       </div>
     )
   }
