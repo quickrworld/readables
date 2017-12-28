@@ -90,7 +90,7 @@ export function fetchCategoriesSuccess(response) {
 }
 
 export function fetchCategoriesFailure(response) {
-  const status = response // TODO: extract status from response
+  const status = { ...response, timestamp: Date.now() }
   return {
     type: FETCH_CATEGORIES_FAILURE,
     status
@@ -149,7 +149,7 @@ export function fetchReadablesSuccess(category, response) {
 }
 
 export function fetchReadablesFailure(category, response) {
-  const status = response
+  const status = { ...response, timestamp: Date.now() }
   return {
     type: FETCH_READABLES_FAILURE,
     category,
@@ -201,7 +201,7 @@ export function fetchReadableSuccess(id, response) {
 }
 
 export function fetchReadableFailure(id, response) {
-  const status = response
+  const status = { ...response, timestamp: Date.now() }
   return {
     type: FETCH_READABLE_FAILURE,
     id,
@@ -248,6 +248,8 @@ export function fetchCommentsRequest(readable) {
 }
 
 export function fetchCommentsSuccess(readable, response) {
+  console.log('readable', readable)
+  console.log('response', response)
   const comments = response.reduce((comments, comment) => {
     comments[comment.id] = comment
     return comments
@@ -261,7 +263,7 @@ export function fetchCommentsSuccess(readable, response) {
 }
 
 export function fetchCommentsFailure(readable, response) {
-  const status = response // TODO: extract status from response
+  const status = { ...response, timestamp: Date.now() }
   return {
     type: FETCH_COMMENTS_FAILURE,
     readable,
@@ -341,7 +343,7 @@ export function fetchReadableUpvoteSuccess(id, response) {
 }
 
 export function fetchReadableUpvoteFailure(id, response) {
-  const status = response
+  const status = { ...response, timestamp: Date.now() }
   return {
     type: FETCH_READABLE_UPVOTE_FAILURE,
     id,
@@ -398,7 +400,7 @@ export function fetchReadableDownvoteSuccess(id, response) {
 }
 
 export function fetchReadableDownvoteFailure(id, response) {
-  const status = response
+  const status = { ...response, timestamp: Date.now() }
   return {
     type: FETCH_READABLE_DOWNVOTE_FAILURE,
     id,
@@ -455,7 +457,7 @@ export function fetchCommentUpvoteSuccess(id, response) {
 }
 
 export function fetchCommentUpvoteFailure(id, response) {
-  const status = response
+  const status = { ...response, timestamp: Date.now() }
   return {
     type: FETCH_COMMENT_UPVOTE_FAILURE,
     id,
@@ -512,7 +514,7 @@ export function fetchCommentDownvoteSuccess(id, response) {
 }
 
 export function fetchCommentDownvoteFailure(id, response) {
-  const status = response
+  const status = { ...response, timestamp: Date.now() }
   return {
     type: FETCH_COMMENT_DOWNVOTE_FAILURE,
     id,
@@ -521,7 +523,6 @@ export function fetchCommentDownvoteFailure(id, response) {
 }
 
 // sort readables
-
 export function sortReadablesNewest() {
   return {
     type: SORT_READABLES_NEWEST
@@ -600,9 +601,10 @@ export function fetchCommentAddSuccess(json) {
 }
 
 export function fetchCommentAddFailure(json) {
+  const status = { ...json, timestamp: Date.now() }
   return {
     type: FETCH_COMMENT_ADD_FAILURE,
-    error: json
+    error: status
   }
 }
 
@@ -645,9 +647,10 @@ export function fetchCommentEditSuccess(json) {
 }
 
 export function fetchCommentEditFailure(json) {
+  const response = { ...json, timestamp: Date.now() }
   return {
     type: FETCH_COMMENT_EDIT_FAILURE,
-    error: json
+    status: response
   }
 }
 
@@ -688,9 +691,10 @@ export function fetchCommentDeleteSuccess(json) {
 }
 
 export function fetchCommentDeleteFailure(json) {
+  const response = { ...json, timestamp: Date.now() }
   return {
     type: FETCH_COMMENT_DELETE_FAILURE,
-    error: json
+    status: response
   }
 }
 
@@ -736,9 +740,10 @@ export function fetchReadableAddSuccess(json) {
 }
 
 export function fetchReadableAddFailure(json) {
+  const response = { ...json, timestamp: Date.now() }
   return {
     type: FETCH_READABLE_ADD_FAILURE,
-    error: json
+    status: response
   }
 }
 
@@ -780,9 +785,10 @@ export function fetchReadableEditSuccess(json) {
 }
 
 export function fetchReadableEditFailure(json) {
+  const response = { ...json, timestamp: Date.now() }
   return {
     type: FETCH_READABLE_EDIT_FAILURE,
-    error: json
+    status: response
   }
 }
 
@@ -823,8 +829,9 @@ export function fetchReadableDeleteSuccess(json) {
 }
 
 export function fetchReadableDeleteFailure(json) {
+  const response = { ...json, timestamp: Date.now() }
   return {
     type: FETCH_READABLE_DELETE_FAILURE,
-    error: json
+    status: response
   }
 }

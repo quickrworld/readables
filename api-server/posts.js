@@ -21,7 +21,7 @@ const defaultData = {
     body: 'As the requirements for JavaScript single-page applications have become increasingly complicated, our code must manage more state than ever before. This state can include server responses and cached data, as well as locally created data that has not yet been persisted to the server. UI state is also increasing in complexity, as we need to manage active routes, selected tabs, spinners, pagination controls, and so on.',
     author: 'Dan Abramov',
     category: 'redux',
-    voteScore: -5,
+    voteScore: 5,
     deleted: false,
     commentCount: 0
   }

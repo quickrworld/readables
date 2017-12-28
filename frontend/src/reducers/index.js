@@ -356,6 +356,8 @@ function commentsByReadable(state = {}, action) {
       upvotedState[action.comment.parentId].items[action.id] = action.comment
       return upvotedState
     case FETCH_COMMENT_UPVOTE_FAILURE:
+      console.log('state', state)
+      console.log('action', action)
       return state
     case DOWNVOTE_COMMENT:
       return state // we might want to update the value of voteCount for the matching comment (local copy)
@@ -402,6 +404,97 @@ function commentsByReadable(state = {}, action) {
   }
 }
 
+function errors(state = {error: ''}, action) {
+  switch(action.type) {
+    case FETCH_CATEGORIES_FAILURE:
+      return Object.assign({}, state, {
+        error: FETCH_CATEGORIES_FAILURE,
+        message: action.status.error.message,
+        timestamp: action.status.timestamp,
+      })
+    case FETCH_READABLES_FAILURE:
+      return Object.assign({}, state, {
+        error: FETCH_READABLES_FAILURE,
+        message: action.status.error.message,
+        timestamp: action.status.timestamp,
+      })
+    case FETCH_COMMENTS_FAILURE:
+      return Object.assign({}, state, {
+        error: FETCH_COMMENTS_FAILURE,
+        message: action.status.error.message,
+        timestamp: action.status.timestamp,
+      })
+    case FETCH_READABLE_FAILURE:
+      return Object.assign({}, state, {
+        error: FETCH_READABLE_FAILURE,
+        message: action.status.error.message,
+        timestamp: action.status.timestamp,
+      })
+    case FETCH_READABLE_DOWNVOTE_FAILURE:
+      return Object.assign({}, state, {
+        error: FETCH_READABLE_DOWNVOTE_FAILURE,
+        message: action.status.error.message,
+        timestamp: action.status.timestamp,
+      })
+    case FETCH_READABLE_UPVOTE_FAILURE:
+      return Object.assign({}, state, {
+        error: FETCH_READABLE_UPVOTE_FAILURE,
+        message: action.status.error.message,
+        timestamp: action.status.timestamp,
+      })
+    case FETCH_COMMENT_DOWNVOTE_FAILURE:
+      return Object.assign({}, state, {
+        error: FETCH_COMMENT_DOWNVOTE_FAILURE,
+        message: action.status.error.message,
+        timestamp: action.status.timestamp,
+      })
+    case FETCH_COMMENT_UPVOTE_FAILURE:
+      return Object.assign({}, state, {
+        error: FETCH_COMMENT_UPVOTE_FAILURE,
+        message: action.status.error.message,
+        timestamp: action.status.timestamp,
+      })
+    case FETCH_COMMENT_ADD_FAILURE:
+      return Object.assign({}, state, {
+        error: FETCH_COMMENT_ADD_FAILURE,
+        message: action.status && action.status.error && action.status.error.message,
+        timestamp: action.status && action.status.timestamp
+      })
+    case FETCH_COMMENT_EDIT_FAILURE:
+      return Object.assign({}, state, {
+        error: FETCH_COMMENT_EDIT_FAILURE,
+        message: action.status && action.status.error && action.status.error.message,
+        timestamp: action.status && action.status.timestamp
+      })
+    case FETCH_COMMENT_DELETE_FAILURE:
+      return Object.assign({}, state, {
+        error: FETCH_COMMENT_DELETE_FAILURE,
+        message: action.status && action.status.error && action.status.error.message,
+        timestamp: action.status && action.status.timestamp
+      })
+    case FETCH_READABLE_ADD_FAILURE:
+      return Object.assign({}, state, {
+        error: FETCH_READABLE_ADD_FAILURE,
+        message: action.status && action.status.error && action.status.error.message,
+        timestamp: action.status && action.status.timestamp
+      })
+    case FETCH_READABLE_EDIT_FAILURE:
+      return Object.assign({}, state, {
+        error: FETCH_READABLE_EDIT_FAILURE,
+        message: action.status && action.status.error && action.status.error.message,
+        timestamp: action.status && action.status.timestamp
+      })
+    case FETCH_READABLE_DELETE_FAILURE:
+      return Object.assign({}, state, {
+        error: FETCH_READABLE_DELETE_FAILURE,
+        message: action.status && action.status.error && action.status.error.message,
+        timestamp: action.status && action.status.timestamp
+      })
+    default:
+      return state
+  }
+}
+
 // root reducer
 const reducer = combineReducers({
   allCategories,
@@ -410,6 +503,7 @@ const reducer = combineReducers({
   readableById,
   commentsByReadable,
   selectedCategory,
+  errors
 })
 
 export default reducer
