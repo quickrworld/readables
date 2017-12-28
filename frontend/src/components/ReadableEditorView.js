@@ -18,8 +18,22 @@ class ReadableEditorView extends Component {
   addReadable = () => {
     if (!this.state.author ||
       !this.state.story ||
-      !this.state.category ||
+      !this.state.title ||
       this.state.category === 'all') {
+      let errorMessage = ''
+      if(!this.state.author) {
+        errorMessage = errorMessage + 'Author is required.'
+      }
+      if(this.state.category === 'all') {
+        errorMessage = errorMessage + 'Category is required.'
+      }
+      if(!this.state.title) {
+        errorMessage = errorMessage + ' ' + 'Title is required.'
+      }
+      if(!this.state.story) {
+        errorMessage = errorMessage + ' ' + 'Story is required.'
+      }
+      this.setState({ errorMessage: errorMessage.trim() })
       return
     }
     this.props.addReadable({
@@ -37,7 +51,18 @@ class ReadableEditorView extends Component {
     }
   }
   editReadable = () => {
-    if (!this.state.author || !this.state.story) {
+    if (!this.state.author || !this.state.story || !this.state.title) {
+      let errorMessage = ''
+      if(!this.state.author) {
+        errorMessage = errorMessage + 'Author is required.'
+      }
+      if(!this.state.title) {
+        errorMessage = errorMessage + ' ' + 'Title is required.'
+      }
+      if(!this.state.story) {
+        errorMessage = errorMessage + ' ' + 'Story is required.'
+      }
+      this.setState({ errorMessage: errorMessage.trim() })
       return
     }
     this.props.editReadable({
@@ -61,7 +86,8 @@ class ReadableEditorView extends Component {
       category: props.category,
       title: props.title,
       story: props.story,
-      categories: props.categories
+      categories: props.categories,
+      errorMessage: '',
     }
   }
 
@@ -167,6 +193,17 @@ class ReadableEditorView extends Component {
                   style={{align: 'right', borderWidth: '0px'}}>Submit
           </button>
         </div>
+        {this.state.errorMessage &&
+        <div style={{gridRow: '4', gridColumnStart: '1', padding: '0px, 6px, 0px, 6px', color: 'red'}}>
+          {this.state.errorMessage}
+          {this.state.errorMessage &&
+          <button style={{
+            fontSize: '14px',
+            alignContent: 'center',
+            border: '0px',
+            color: 'red'}}
+                  onClick={() => this.setState({errorMessage: ''})}>&#x24e7;</button>}
+        </div>}
       </div>
     )
   }
