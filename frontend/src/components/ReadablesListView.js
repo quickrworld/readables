@@ -35,26 +35,27 @@ class ReadablesListView extends Component {
 }
 
 function mapStateToProps(state, ownProps) {
-  const { readablesByCategory } = state
   const myCategory = ownProps.category
+  const { readablesByCategory } = state
+  function compare(r1,r2) {
+    if (readablesByCategory.order === SORT_READABLES_NEWEST) {
+      return r1.timestamp < r2.timestamp ? 1: -1
+    }
+    if (readablesByCategory.order === SORT_READABLES_OLDEST) {
+      return r1.timestamp > r2.timestamp ? 1: -1
+    }
+    if (readablesByCategory.order === SORT_READABLES_TOPVOTED) {
+      return r1.voteScore < r2.voteScore ? 1: -1
+    }
+    return r1.timestamp > r2.timestamp ? 1: -1
+  }
   const orderedReadables = readablesByCategory.order
     ? (readablesByCategory[myCategory]
       ? Object.keys(readablesByCategory[myCategory].items).reduce((readables, readable) => {
           readables.push(readablesByCategory[myCategory].items[readable])
           return readables
         }, [])
-        : []).sort((r1, r2) => {
-        if (readablesByCategory.order === SORT_READABLES_NEWEST) {
-          return r1.timestamp < r2.timestamp ? 1: -1
-        }
-        if (readablesByCategory.order === SORT_READABLES_OLDEST) {
-          return r1.timestamp > r2.timestamp ? 1: -1
-        }
-        if (readablesByCategory.order === SORT_READABLES_TOPVOTED) {
-          return r1.voteScore < r2.voteScore ? 1: -1
-        }
-        return r1.timestamp > r2.timestamp ? 1: -1
-      })
+        : []).sort((r1, r2) => compare(r1, r2))
     : (readablesByCategory[myCategory]
       ? Object.keys(readablesByCategory[myCategory].items).reduce((readables, readable) => {
         readables.push(readablesByCategory[myCategory].items[readable])
