@@ -41,32 +41,16 @@ function mapStateToProps(state, ownProps) {
 
   const { commentsByReadable } = state
 
-  function compare(c1, c2) {
-    if (commentsByReadable.order === SORT_COMMENTS_NEWEST) {
-      return (c1.timestamp < c2.timestamp) ? 1 : -1
-    }
-    if (commentsByReadable.order === SORT_COMMENTS_OLDEST) {
-      return (c1.timestamp > c2.timestamp) ? 1 : -1
-    }
-    if (commentsByReadable.order === SORT_COMMENTS_TOPVOTED) {
-      return (c1.voteScore < c2.voteScore) ? 1 : -1
-    }
-    return c1.timestamp < c2.timestamp
-  }
+  const commentsArray =
+    commentsByReadable[selectedReadable] && commentsByReadable[selectedReadable].items
+    ? Object.keys(commentsByReadable[selectedReadable].items).reduce((comments, comment) => {
+        comments.push(commentsByReadable[selectedReadable].items[comment])
+        return comments
+      }, [])
+    : []
 
-  const sortedComments = commentsByReadable.order
-    ? (commentsByReadable[selectedReadable] &&
-      commentsByReadable[selectedReadable].items ?
-      Object.keys(commentsByReadable[selectedReadable].items).reduce((comments, comment) => {
-        comments.push(commentsByReadable[selectedReadable].items[comment])
-        return comments
-      }, []) : []).sort((c1, c2) => compare(c1, c2))
-    : commentsByReadable[selectedReadable] &&
-      commentsByReadable[selectedReadable].items ?
-      Object.keys(commentsByReadable[selectedReadable].items).reduce((comments, comment) => {
-        comments.push(commentsByReadable[selectedReadable].items[comment])
-        return comments
-      }, []) : []
+  const sortedComments =  sortCommentsArray(commentsArray,
+    commentsByReadable.order ? commentsByReadable.order : SORT_COMMENTS_NEWEST)
 
   const comments = selectedReadable
     ? {
@@ -81,6 +65,22 @@ function mapStateToProps(state, ownProps) {
       }
 
   return { comments, selectedReadable }
+}
+
+function sortCommentsArray(comments, order) {
+  function compare(c1, c2) {
+    if (order === SORT_COMMENTS_NEWEST) {
+      return (c1.timestamp < c2.timestamp) ? 1 : -1
+    }
+    if (order === SORT_COMMENTS_OLDEST) {
+      return (c1.timestamp > c2.timestamp) ? 1 : -1
+    }
+    if (order === SORT_COMMENTS_TOPVOTED) {
+      return (c1.voteScore < c2.voteScore) ? 1 : -1
+    }
+    return c1.timestamp < c2.timestamp
+  }
+  return comments.sort((c1,c2) => compare(c1,c2))
 }
 
 function mapDispatchToProps(dispatch) {
