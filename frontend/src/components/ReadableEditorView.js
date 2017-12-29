@@ -25,7 +25,7 @@ class ReadableEditorView extends Component {
         errorMessage = errorMessage + 'Author is required.'
       }
       if(this.state.category === 'all') {
-        errorMessage = errorMessage + 'Category is required.'
+        errorMessage = errorMessage + ' ' + 'Category is required.'
       }
       if(!this.state.title) {
         errorMessage = errorMessage + ' ' + 'Title is required.'
@@ -194,7 +194,12 @@ class ReadableEditorView extends Component {
           </button>
         </div>
         {this.state.errorMessage &&
-        <div style={{gridRow: '4', gridColumnStart: '1', padding: '0px, 6px, 0px, 6px', color: 'red'}}>
+        <div style={{
+          gridRow: '4',
+          gridColumnStart: '1',
+          gridColumnEnd: '3',
+          padding: '0px, 6px, 0px, 6px',
+          color: 'red'}}>
           {this.state.errorMessage}
           {this.state.errorMessage &&
           <button style={{
