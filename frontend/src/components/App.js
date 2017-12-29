@@ -63,6 +63,16 @@ class App extends Component {
       height: '100%',
       padding: '20px',
       gridTemplateRows: 'minmax(min-content, min-content)',
+    },
+    logoBoxStyle: {
+      fontWeight: 'lighter',
+      borderBottom: '1px solid rgb(28,38,47)',
+    },
+    logoTextStyle: {
+      fontSize: '21px',
+      color: 'rgb(255,255,255)',
+      padding: '10px 12px 5px 24px',
+      fontWeight: 200,
     }
   }
   componentDidMount() {
@@ -77,23 +87,15 @@ class App extends Component {
       <Router>
         <div id={'grid'} style={this.styles.gridStyle}>
         <div id="sidebar" style={this.styles.sidebarStyle}>
-          <div id="logo" style={{
-            fontWeight: 'lighter',
-            borderBottom: '1px solid rgb(28,38,47)',
-          }}>
-            <div style={{
-              fontSize: '21px',
-              color: 'rgb(255,255,255)',
-              padding: '10px 12px 5px 24px',
-              fontWeight: 200,
-            }}>
+          <div id="logo" style={this.styles.logoBoxStyle}>
+            <div style={this.styles.logoTextStyle}>
               Readable
             </div>
             <div style={this.styles.bylineStyle}>
               For those who haven't Reddit
             </div>
           </div>
-          <div className="sidebar-main" style={this.styles.sidebarMainStyle}>
+          <div style={this.styles.sidebarMainStyle}>
             <div>
               <CategoriesListView/>
             </div>
@@ -101,8 +103,8 @@ class App extends Component {
         </div>
         <div style={this.styles.contentStyle}>
           <ContentHeader myCategory={this.props.category}/>
-          <div className="content-main" style={this.styles.contentMainStyle}>
-            <div className="main-content" style={this.styles.mainContentStyle}>
+          <div style={this.styles.contentMainStyle}>
+            <div style={this.styles.mainContentStyle}>
               <div>
                 <Route exact={true} path={'/'} render={() => (
                   <div>

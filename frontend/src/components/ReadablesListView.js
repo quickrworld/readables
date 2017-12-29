@@ -37,40 +37,40 @@ class ReadablesListView extends Component {
 function mapStateToProps(state, ownProps) {
   const myCategory = ownProps.category
   const { readablesByCategory } = state
-  function compare(r1,r2) {
-    if (readablesByCategory.order === SORT_READABLES_NEWEST) {
-      return r1.timestamp < r2.timestamp ? 1: -1
-    }
-    if (readablesByCategory.order === SORT_READABLES_OLDEST) {
-      return r1.timestamp > r2.timestamp ? 1: -1
-    }
-    if (readablesByCategory.order === SORT_READABLES_TOPVOTED) {
-      return r1.voteScore < r2.voteScore ? 1: -1
-    }
-    return r1.timestamp > r2.timestamp ? 1: -1
-  }
-  const orderedReadables = readablesByCategory.order
-    ? (readablesByCategory[myCategory]
-      ? Object.keys(readablesByCategory[myCategory].items).reduce((readables, readable) => {
-          readables.push(readablesByCategory[myCategory].items[readable])
-          return readables
-        }, [])
-        : []).sort((r1, r2) => compare(r1, r2))
-    : (readablesByCategory[myCategory]
-      ? Object.keys(readablesByCategory[myCategory].items).reduce((readables, readable) => {
-        readables.push(readablesByCategory[myCategory].items[readable])
-        return readables
-      }, [])
-      : [])
+
+  const readablesArray = (readablesByCategory[myCategory]
+    ? Object.keys(readablesByCategory[myCategory].items).reduce((readables, readable) => {
+      readables.push(readablesByCategory[myCategory].items[readable])
+      return readables
+    }, [])
+    : [])
+
+  const sortedReadables = sortReadables(readablesArray, readablesByCategory.order)
 
   const readables = {
     isFetching: readablesByCategory[myCategory] && readablesByCategory[myCategory].isFetching,
     lastUpdated: readablesByCategory[myCategory] && readablesByCategory[myCategory].lastUpdated,
-    readables: orderedReadables,
+    readables: sortedReadables, //orderedReadables,
     order: readablesByCategory.order ? readablesByCategory.order : SORT_READABLES_NEWEST // remove this?
   }
 
   return { readables, myCategory }
+}
+
+function sortReadables(readables, order) {
+  function compare(r1,r2) {
+    if (order === SORT_READABLES_NEWEST) {
+      return r1.timestamp < r2.timestamp ? 1: -1
+    }
+    if (order === SORT_READABLES_OLDEST) {
+      return r1.timestamp > r2.timestamp ? 1: -1
+    }
+    if (order === SORT_READABLES_TOPVOTED) {
+      return r1.voteScore < r2.voteScore ? 1: -1
+    }
+    return r1.timestamp > r2.timestamp ? 1: -1
+  }
+  return readables.sort((r1,r2) => compare(r1,r2))
 }
 
 function mapDispatchToProps(dispatch) {

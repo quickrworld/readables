@@ -7,7 +7,9 @@ class CategoryListView extends Component {
     return (
       <div>
         <div style={{paddingTop:'12px'}}>
-          <CategoryView category={{'name': 'All Categories', 'path':'all'}}/>
+          <CategoryView category={{
+            'name': 'All Categories',
+            'path':'all'}}/>
         </div>
         {this.props.categories.categories.map((category) => (
           <div key={category.path} >

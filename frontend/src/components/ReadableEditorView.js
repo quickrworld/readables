@@ -165,24 +165,27 @@ class ReadableEditorView extends Component {
       color: 'red',
       paddingBottom:'0px',
       paddingTop:'0px'
+    },
+    closeButtonStyle: {
+      align: 'right',
+      borderWidth: '0px'
+    },
+    submitButtonStyle: {
+      align: 'right',
+      borderWidth: '0px'
     }
   }
   render() {
     return (
       <div style={this.styles.editorStyle}>
-        <div style={{
-          gridRow: '1',
-          gridColumnStart: '1',
-          gridColumnEnd: '5',
-        }}>
+        <div style={{gridRow: '1', gridColumnStart: '1', gridColumnEnd: '5',}}>
           <span style={this.styles.authorLabelStyle}>Authored by </span>
           <input
             type="text"
             onChange={this.handleAuthorChange}
             name={'author'}
             placeholder={'Author'}
-            value={this.state.author ? this.state.author : ''}
-          />
+            value={this.state.author ? this.state.author : ''}/>
           <span style={this.styles.categoryLabelStyle}>Category </span>
           <select name='categorySelector'
                   onChange={this.handleCategoryChange}
@@ -214,12 +217,12 @@ class ReadableEditorView extends Component {
           <button onMouseEnter={this.handleMouseEnter}
                   onMouseLeave={this.handleMouseLeave}
                   onClick={this.props.close}
-                  style={{align: 'right', borderWidth: '0px'}}>Close
+                  style={this.styles.closeButtonStyle}>Close
           </button>
           <button onMouseEnter={this.handleMouseEnter}
                   onMouseLeave={this.handleMouseLeave}
                   onClick={this.props.id ? this.editReadable : this.addReadable}
-                  style={{align: 'right', borderWidth: '0px'}}>Submit
+                  style={this.styles.submitButtonStyle}>Submit
           </button>
         </div>
         {this.state.errorMessage &&

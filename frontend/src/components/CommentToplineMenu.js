@@ -43,11 +43,11 @@ class CommentToplineMenu extends Component {
             Newest</span>
           <span> | </span>
           <span ref={(span) => { this.oldest = span }}
-                                  onClick={this.sortOldest} style={this.styles.sortLinkStyle}>
+                onClick={this.sortOldest} style={this.styles.sortLinkStyle}>
             Oldest</span>
           <span> | </span>
           <span ref={(span) => { this.topvoted = span }}
-                                  onClick={this.sortTopvoted} style={this.styles.sortLinkStyle}>
+                onClick={this.sortTopvoted} style={this.styles.sortLinkStyle}>
             Top voted</span>
           <hr/>
         </div>

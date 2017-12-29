@@ -78,6 +78,10 @@ class CommentView extends Component {
     commentEditorBox: {
       marginBottom: '12px',
       borderBottom: '1px solid lightgray',
+    },
+    upvoteStyle: {
+      paddingLeft:'4px',
+      paddingRight:'4px'
     }
   }
   render() {
@@ -92,7 +96,7 @@ class CommentView extends Component {
             <span style={this.styles.commentVoteLineStyle}><span>
                 {this.props.comment &&
                 this.props.comment.voteScore} votes </span>
-              <span aria-label="Up vote" style={{paddingLeft:'4px', paddingRight:'4px'}}>
+              <span aria-label="Up vote" style={this.styles.upvoteStyle}>
                 <UpvoteCommentView id={this.props.comment.id} parent={this.props.comment.parentId}/>
               </span>
               <span> </span>
@@ -123,8 +127,7 @@ class CommentView extends Component {
           this.props.comment.body &&
           this.props.comment.body}
         </div>
-        <div style={{...this.styles.commentEditorBox,
-          display: this.state.editorOpen ? 'block' : 'none'}}>
+        <div style={{display: this.state.editorOpen ? 'block' : 'none', ...this.styles.commentEditorBox}}>
           <CommentEditorView
             id={this.props.comment.id}
             author={this.props.comment.author}

@@ -47,12 +47,15 @@ class ContentHeader extends Component {
       gridColumnStart:'3',
       gridColumnEnd:'4',
       textAlign: 'right'
+    },
+    categoryLabelStyle: {
+      textAlign: 'center'
     }
   }
   render() {
     return (
       <div id="content-header" style={this.styles.contentHeaderStyle}>
-        <div style={{gridColumnStart:'2', gridColumnEnd:'3', textAlign: 'center'}}>
+        <div style={{gridColumnStart:'2', gridColumnEnd:'3', ...this.styles.categoryLabelStyle}}>
           {this.props.category}
         </div>
         <div style={this.styles.errorMessageStyle}>
