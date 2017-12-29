@@ -36,7 +36,7 @@ class CommentEditorView extends Component {
         errorMessage = errorMessage + 'Author is required.'
       }
       if(!this.state.comment) {
-        errorMessage = errorMessage + ' ' + 'Comment is required.'
+        errorMessage = `${errorMessage} Comment is required.`
       }
       this.setState({ errorMessage: errorMessage.trim() })
       return
@@ -60,7 +60,7 @@ class CommentEditorView extends Component {
         errorMessage = errorMessage + 'Author is required.'
       }
       if(!this.state.comment) {
-        errorMessage = errorMessage + ' ' + 'Comment is required.'
+        errorMessage = `${errorMessage} Comment is required.`
       }
       this.setState({ errorMessage: errorMessage.trim() })
       return

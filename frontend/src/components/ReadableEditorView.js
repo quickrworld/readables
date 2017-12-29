@@ -22,16 +22,16 @@ class ReadableEditorView extends Component {
       this.state.category === 'all') {
       let errorMessage = ''
       if(!this.state.author) {
-        errorMessage = errorMessage + 'Author is required.'
+        errorMessage = `${errorMessage} Author is required.`
       }
       if(this.state.category === 'all') {
-        errorMessage = errorMessage + ' ' + 'Category is required.'
+        errorMessage = `${errorMessage} Category is required.`
       }
       if(!this.state.title) {
-        errorMessage = errorMessage + ' ' + 'Title is required.'
+        errorMessage = `${errorMessage}  Title is required.`
       }
       if(!this.state.story) {
-        errorMessage = errorMessage + ' ' + 'Story is required.'
+        errorMessage = `${errorMessage} Story is required.`
       }
       this.setState({ errorMessage: errorMessage.trim() })
       return
@@ -54,13 +54,13 @@ class ReadableEditorView extends Component {
     if (!this.state.author || !this.state.story || !this.state.title) {
       let errorMessage = ''
       if(!this.state.author) {
-        errorMessage = errorMessage + 'Author is required.'
+        errorMessage = `${errorMessage} Author is required.`
       }
       if(!this.state.title) {
-        errorMessage = errorMessage + ' ' + 'Title is required.'
+        errorMessage = `${errorMessage} Title is required.`
       }
       if(!this.state.story) {
-        errorMessage = errorMessage + ' ' + 'Story is required.'
+        errorMessage = `errorMessage} Story is required.`
       }
       this.setState({ errorMessage: errorMessage.trim() })
       return
