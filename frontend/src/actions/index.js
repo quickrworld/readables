@@ -248,6 +248,14 @@ export function fetchCommentsRequest(readable) {
 }
 
 export function fetchCommentsSuccess(readable, response) {
+  const status = { ...response, timestamp: Date.now() }
+  if(response['error']) { // why does this happen?
+    return {
+      type: FETCH_COMMENTS_FAILURE,
+      readable,
+      status
+    }
+  }
   const comments = response.reduce((comments, comment) => {
     comments[comment.id] = comment
     return comments

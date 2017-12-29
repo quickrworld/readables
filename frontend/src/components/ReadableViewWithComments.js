@@ -78,23 +78,46 @@ class ReadableViewWithComments extends Component {
       fontSize: '14px',
       borderBottom: '1px solid lightgray',
       color: 'rgb(79, 79, 79)'
+    },
+    editorBoxStyle: {
+      borderBottom: '1px solid lightgray',
+      marginBottom: '12px'
+    },
+    buttonStyle: {
+      borderWidth: '0px'
+    },
+    upvoteStyle: {
+      paddingLeft: '4px',
+      paddingRight:'4px'
+    },
+    navlinkStyle: {
+      textDecoration: 'none',
+      color: 'rgba(47,61,72,1)'
+    },
+    navlinkActiveStyle: {
+      textDecoration: 'none'
+    },
+    messageBoxStyle: {
+      border: '1px solid lightgray',
+      margin: '20px',
+      padding: '20px',
+      textAlign: 'center',
+      boxShadow: 'rgba(0,0,0,0.5) 0px 2px 4px 0px'
+    },
+    headingStyle: {
+      fontSize:'20px'
     }
   }
   render() {
     if (this.props.deleted === true) {
       return <div
-        style={{
-          border: '1px solid lightgray',
-          margin: '20px',
-          padding: '20px',
-          textAlign: 'center',
-          boxShadow: 'rgba(0,0,0,0.5) 0px 2px 4px 0px'}}>
-        <p style={{fontSize:'20px'}}>{`Readable with id '${this.props.id}' has been deleted`}</p>
+        style={this.styles.messageBoxStyle}>
+        <p style={this.styles.headingStyle}>{`Readable with id '${this.props.id}' has been deleted`}</p>
         <p><span>You could </span>
           <span>
             <NavLink to={{pathname: '/'}}
-              style={{textDecoration: 'none', color: 'rgba(47,61,72,1)'}}
-              activeStyle={{textDecoration: 'none'}}
+              style={this.styles.navlinkStyle}
+              activeStyle={this.styles.navlinkActiveStyle}
               onMouseEnter={this.handleMouseEnter}
               onMouseLeave={this.handleMouseLeave}>browse other readables
             </NavLink>
@@ -103,8 +126,8 @@ class ReadableViewWithComments extends Component {
         <p><span>Or you could even </span>
           <span>
             <NavLink to={{pathname: '/'}}
-                     style={{textDecoration: 'none', color: 'rgba(47,61,72,1)'}}
-                     activeStyle={{textDecoration: 'none'}}
+                     style={this.styles.navlinkStyle}
+                     activeStyle={this.styles.navlinkActiveStyle}
                      onMouseEnter={this.handleMouseEnter}
                      onMouseLeave={this.handleMouseLeave}>write your own
             </NavLink>
@@ -114,18 +137,13 @@ class ReadableViewWithComments extends Component {
     }
     if (this.props.check === '404') {
       return <div
-        style={{
-          border: '1px solid lightgray',
-          margin: '20px',
-          padding: '20px',
-          textAlign: 'center',
-          boxShadow: 'rgba(0,0,0,0.5) 0px 2px 4px 0px'}}>
-        <p style={{fontSize:'20px'}}>{`Readable with id '${this.props.id}' not found`}</p>
+        style={this.styles.messageBoxStyle}>
+        <p style={this.styles.headingStyle}>{`Readable with id '${this.props.id}' not found`}</p>
         <p><span>You could </span>
           <span>
             <NavLink to={{pathname: '/'}}
-              style={{textDecoration: 'none', color: 'rgba(47,61,72,1)'}}
-              activeStyle={{textDecoration: 'none'}}
+              style={this.styles.navlinkStyle}
+              activeStyle={this.styles.navlinkActiveStyle}
               onMouseEnter={this.handleMouseEnter}
               onMouseLeave={this.handleMouseLeave}>browse other readables
             </NavLink>
@@ -135,10 +153,10 @@ class ReadableViewWithComments extends Component {
         <p><span>Or you could even </span>
           <span>
             <NavLink to={{pathname: '/'}}
-                 style={{textDecoration: 'none', color: 'rgba(47,61,72,1)'}}
-                 activeStyle={{textDecoration: 'none'}}
-                 onMouseEnter={this.handleMouseEnter}
-                 onMouseLeave={this.handleMouseLeave}>write your own
+               style={this.styles.navlinkStyle}
+               activeStyle={this.styles.navlinkActiveStyle}
+               onMouseEnter={this.handleMouseEnter}
+               onMouseLeave={this.handleMouseLeave}>write your own
             </NavLink>
           </span>
         </p>
@@ -146,7 +164,7 @@ class ReadableViewWithComments extends Component {
     }
     return (
       <div>
-        <div className="top-line" style={this.styles.topLineStyle}>
+        <div style={this.styles.topLineStyle}>
           <div style={this.styles.titleStyle}>
             {this.props.title}
           </div>
@@ -160,14 +178,14 @@ class ReadableViewWithComments extends Component {
                 onMouseEnter={this.handleMouseEnterDelete}
                 onMouseLeave={this.handleMouseLeave}
                 onClick={() => this.deleteReadable()}
-                style={{borderWidth: '0px'}}>
+                style={this.styles.buttonStyle}>
                 Delete
               </button>
               <button
                 onMouseEnter={this.handleMouseEnter}
                 onMouseLeave={this.handleMouseLeave}
                 onClick={() => this.openEditor()}
-                style={{borderWidth: '0px'}}>
+                style={this.styles.buttonStyle}>
                 Edit
               </button>
             </span>
@@ -179,7 +197,7 @@ class ReadableViewWithComments extends Component {
             <span style={{whiteSpace: 'nowrap'}}>{this.props.commentCount} Comments</span>
             <span> | </span>
             <span style={this.styles.voteStyle}><span>{this.props.voteScore} votes </span>
-              <span aria-label="Up vote" style={{paddingLeft: '4px', paddingRight:'4px'}}>
+              <span aria-label="Up vote" style={this.styles.upvoteStyle}>
                 <UpvoteReadableView readable={this.props.readable}/>
               </span> <span aria-label="Down vote">
                 <DownvoteReadableView readable={this.props.readable}/>
@@ -189,9 +207,8 @@ class ReadableViewWithComments extends Component {
           <div className="story" style={this.styles.storyStyle}>
             {this.props.body}
           </div>
-          <div style={{
-            display: this.state.editorOpen ? 'block' : 'none',
-            gridColumnStart:'1', gridColumnEnd: '5', borderBottom: '1px solid lightgray', marginBottom: '12px'}}>
+          <div style={{display: this.state.editorOpen ? 'block' : 'none',
+            gridColumnStart:'1', gridColumnEnd: '5', ...this.styles.editorBoxStyle}}>
             <ReadableEditorView
               id={this.props.id}
               author={this.props.author}

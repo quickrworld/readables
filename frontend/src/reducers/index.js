@@ -227,11 +227,9 @@ function readableById(state = {
       return readableEditedState
     case FETCH_READABLE_DELETE_SUCCESS:
       let deletedReadableState = Object.assign({}, state)
-      console.log('deletedReadableState1', deletedReadableState)
       delete deletedReadableState[action.readable.id].readable
       deletedReadableState[action.readable.id].readable =
         {id: action.readable.id, deleted: true, body: 'deleted!', category: action.readable.category}
-      console.log('deletedReadableState2', deletedReadableState)
       return deletedReadableState
     case FETCH_READABLE_DELETE_FAILURE:
       return state
@@ -356,8 +354,6 @@ function commentsByReadable(state = {}, action) {
       upvotedState[action.comment.parentId].items[action.id] = action.comment
       return upvotedState
     case FETCH_COMMENT_UPVOTE_FAILURE:
-      console.log('state', state)
-      console.log('action', action)
       return state
     case DOWNVOTE_COMMENT:
       return state // we might want to update the value of voteCount for the matching comment (local copy)
