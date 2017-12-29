@@ -27,60 +27,73 @@ class ReadableView extends Component {
     event.target.style.color = 'rgb(0,0,0)'
     event.target.style.borderRadius = '4px'
   }
-  render() {
-    const id=this.props.id
-    const author=this.props.readable.author
-    const title=this.props.readable.title
-    const story=this.props.readable.body
-    const category=this.props.readable.category
-    const topLineStyle = {
+  styles = {
+    topLineStyle: {
       display: 'grid',
       gridTemplateColumns: '1fr 1fr',
       gridTemplateRows: 'auto minmax(min-content, min-content)',
       paddingBottom: '6px',
-    }
-    const titleStyle = {
+    },
+    titleStyle: {
       gridColumnStart: '1',
       gridColumnEnd: '2',
       fontSize: '18px',
       color: 'rgb(79, 79, 79)'
-    }
-    const editIconStyle = {
+    },
+    editIconStyle: {
       gridColumnStart: '2',
       gridColumnEnd: '3',
       textAlign: 'right',
       alignContent: 'center'
-    }
-    const editLabelStyle = {
+    },
+    editLabelStyle: {
       fontSize: '12pt',
       color: 'rgb(79, 79, 79)'
-    }
-    const voteStyle = {
+    },
+    voteStyle: {
       whiteSpace: 'nowrap',
       color: 'rgb(79, 79, 79)'
-    }
-    const storyStyle = {
+    },
+    storyStyle: {
       gridColumnStart: '1',
       gridColumnEnd: '3',
       padding: '12px 0px 12px 0px',
       fontSize: '14px',
       borderBottom: '1px solid lightgray',
       color: 'rgb(79, 79, 79)'
-    }
-    const headlineStyle = {
+    },
+    headlineStyle: {
       gridColumnStart: '1',
       gridColumnEnd: '3',
       color: 'rgb(79, 79, 79)'
+    },
+    navlinkStyle: {
+      textDecoration: 'none',
+      color: 'rgba(47,61,72,1)'
+    },
+    navlinkActiveStyle: {
+      textDecoration: 'none',
+    },
+    readableEditorViewStyle: {
+        borderBottom: '1px solid lightgray',
+        marginBottom: '12px'
     }
+  }
+  render() {
+    const id=this.props.id
+    const author=this.props.readable.author
+    const title=this.props.readable.title
+    const story=this.props.readable.body
+    const category=this.props.readable.category
     return (
       <div>
-        <div className="top-line" style={topLineStyle}>
-          <div style={titleStyle}>
+        <div style={this.styles.topLineStyle}>
+          <div style={this.styles.titleStyle}>
             {this.props.readable.title} {(this.props.category === 'all') && <span>&#183; </span>}
             {(this.props.category === 'all') && this.props.readableCategoryName}
           </div>
-          <div style={editIconStyle}>
-            <span style={editLabelStyle}>
+          <div style={this.styles.editIconStyle}>
+            <span style={this.styles.editLabelStyle}>
               <button
                 onMouseEnter={this.handleMouseEnter}
                 onMouseLeave={this.handleMouseLeave}
@@ -89,7 +102,7 @@ class ReadableView extends Component {
               </button>
             </span>
           </div>
-          <div style={headlineStyle}>
+          <div style={this.styles.headlineStyle}>
             {this.props.readable.author}
             <span> | </span>
             {this.props.readable.timestamp && new Date(
@@ -98,7 +111,7 @@ class ReadableView extends Component {
             <span style={{whiteSpace: 'nowrap'}}>
               {this.props.readable.commentCount} Comments</span>
             <span> | </span>
-            <span style={voteStyle}>
+            <span style={this.styles.voteStyle}>
               <span>{this.props.readable.voteScore} votes </span>
               <span aria-label="Up vote" style={{paddingLeft: '4px', paddingRight:'4px'}}>
                 <UpvoteReadableView readable={this.props.readable}/> </span>
@@ -106,10 +119,10 @@ class ReadableView extends Component {
                 <DownvoteReadableView readable={this.props.readable}/> </span>
             </span>
           </div>
-          <div className="story" style={storyStyle}>
+          <div className="story" style={this.styles.storyStyle}>
             <NavLink
-              style={{textDecoration: 'none', color: 'rgba(47,61,72,1)'}}
-              activeStyle={{textDecoration: 'none'}}
+              style={this.styles.navlinkStyle}
+              activeStyle={this.styles.navlinkActiveStyle}
               to={{
                 pathname: `/posts/${this.props.id}`,
               }}>
@@ -117,9 +130,8 @@ class ReadableView extends Component {
             </NavLink>
           </div>
         </div>
-        <div style={{
-          display: this.state.editorOpen ? 'block' : 'none',
-          gridColumnStart:'1', gridColumnEnd: '5', borderBottom: '1px solid lightgray', marginBottom: '12px'}}>
+        <div style={{display: this.state.editorOpen ? 'block' : 'none', gridColumnStart:'1', gridColumnEnd: '5',
+          ...this.styles.readableEditorViewStyle}}>
           <ReadableEditorView
             id={id}
             author={author}
