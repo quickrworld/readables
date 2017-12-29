@@ -24,6 +24,28 @@ const defaultData = {
     voteScore: 5,
     deleted: false,
     commentCount: 0
+  },
+  "dfgiuheineifjnvirger": {
+    id: 'dfgiuheineifjnvirger',
+    timestamp: 1467889862340,
+    title: 'Learn Flow',
+    body: 'It\'s hard to build smart tools for dynamic languages like JavaScript. Flow understands your code and makes its knowledge available, enabling other smart tools to be built on top of Flow.',
+    author: 'Amitabh Ojha',
+    category: 'flow',
+    voteScore: 10,
+    deleted: false,
+    commentCount: 0
+  },
+  "igjoritoerjgoeirger": {
+    id: 'igjoritoerjgoeirger',
+    title: 'Learn Jest',
+    timestamp: 1468489782340,
+    body: 'Jest is used by Facebook to test all JavaScript code including React applications. One of Jest\'s philosophies is to provide an integrated "zero-configuration" experience. We observed that when engineers are provided with ready-to-use tools, they end up writing more tests, which in turn results in more stable and healthy code bases.',
+    author: 'Amitabh Ojha',
+    category: 'jest',
+    voteScore: 10,
+    deleted: false,
+    commentCount: 0
   }
 }
 

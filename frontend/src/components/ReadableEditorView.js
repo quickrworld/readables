@@ -14,7 +14,6 @@ class ReadableEditorView extends Component {
       categories: nextProps.categories,
     })
   }
-
   addReadable = () => {
     if (!this.state.author ||
       !this.state.story ||
@@ -77,7 +76,6 @@ class ReadableEditorView extends Component {
       this.props.close()
     }
   }
-
   constructor(props) {
     super(props)
     this.state = {
@@ -90,7 +88,6 @@ class ReadableEditorView extends Component {
       errorMessage: '',
     }
   }
-
   handleMouseEnter = (event) => {
     event.target.style.backgroundColor = 'rgba(47,61,72,.8)'
     event.target.style.color = 'rgba(255,255,255,.8)'
@@ -162,10 +159,12 @@ class ReadableEditorView extends Component {
       color: 'red'
     },
     errorButtonStyle: {
-      fontSize: '14px',
+      fontSize: '12px',
       alignContent: 'center',
       border: '0px',
-      color: 'red'
+      color: 'red',
+      paddingBottom:'0px',
+      paddingTop:'0px'
     }
   }
   render() {
@@ -240,8 +239,9 @@ function mapStateToProps(state) {
   if (allCategories && allCategories.items) {
     const keys = Object.keys(allCategories.items)
     const categories = keys.reduce((categories, category) => {
-      // remember push returns count of items pushed.
-      // so we must return the variable in the following statement
+      // remember array.push returns count of items pushed.
+      // so we must return the array variable after it is nice
+      // and ready in the statement following the push operation
       // Or use concat?
       categories.push(allCategories.items[category])
       return categories

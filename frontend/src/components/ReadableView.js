@@ -76,7 +76,7 @@ class ReadableView extends Component {
       <div>
         <div className="top-line" style={topLineStyle}>
           <div style={titleStyle}>
-            {this.props.readable.title} {(this.props.category === 'all') && '|'}
+            {this.props.readable.title} {(this.props.category === 'all') && <span>&#183; </span>}
             {(this.props.category === 'all') && this.props.readableCategoryName}
           </div>
           <div style={editIconStyle}>
@@ -90,13 +90,17 @@ class ReadableView extends Component {
             </span>
           </div>
           <div style={headlineStyle}>
-            {this.props.readable.author} |
-              {this.props.readable.timestamp && new Date(
-                this.props.readable.timestamp).toDateString()} | <span style={{whiteSpace: 'nowrap'}}>
-              {this.props.readable.commentCount} Comments</span> |
-            <span style={voteStyle}><span>
-              {this.props.readable.voteScore} votes </span>
-              <span aria-label="Up vote">
+            {this.props.readable.author}
+            <span> | </span>
+            {this.props.readable.timestamp && new Date(
+              this.props.readable.timestamp).toDateString()}
+            <span> | </span>
+            <span style={{whiteSpace: 'nowrap'}}>
+              {this.props.readable.commentCount} Comments</span>
+            <span> | </span>
+            <span style={voteStyle}>
+              <span>{this.props.readable.voteScore} votes </span>
+              <span aria-label="Up vote" style={{paddingLeft: '4px', paddingRight:'4px'}}>
                 <UpvoteReadableView readable={this.props.readable}/> </span>
               <span aria-label="Down vote">
                 <DownvoteReadableView readable={this.props.readable}/> </span>

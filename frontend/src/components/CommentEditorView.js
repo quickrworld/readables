@@ -113,20 +113,23 @@ class CommentEditorView extends Component {
       borderWidth: '0px'
     },
     errorMessageStyle: {
+      borderWidth: '0px',
       padding: '0px, 6px, 0px, 6px',
       color: 'red'
     },
     errorButtonStyle: {
-      fontSize: '14px',
+      fontSize: '12px',
       alignContent: 'center',
       border: '0px',
-      color: 'red'
+      color: 'red',
+      paddingBottom:'0px',
+      paddingTop:'0px'
     }
   }
   render() {
     return (
       <div style={this.styles.editorStyle}>
-        <div style={{gridRow: '1', gridColumnStart: '1', gridColumnEnd: '5',}}>
+        <div style={{gridRow: '1', gridColumnStart: '1', gridColumnEnd: '5'}}>
           <span style={this.styles.commentLabelStyle}>Comment as </span>
           <input
             type="text"
@@ -143,7 +146,7 @@ class CommentEditorView extends Component {
             style={this.styles.commentStyle}>
           </textarea>
         </div>
-        <div style={{gridRow:'3', gridColumnStart:'4', ...this.styles.buttonRowStyle, }}>
+        <div style={{gridRow:'3', gridColumnStart:'4', ...this.styles.buttonRowStyle}}>
           <button
             onMouseEnter={this.handleMouseEnter}
             onMouseLeave={this.handleMouseLeave}

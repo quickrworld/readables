@@ -50,7 +50,7 @@ class CommentView extends Component {
       whiteSpace: 'nowrap',
       color: 'rgb(79, 79, 79)'
     },
-    editButtonStyle: {
+    buttonRowStyle: {
       gridColumnStart: '4',
       gridColumnEnd: '5',
       textAlign: 'right',
@@ -68,44 +68,54 @@ class CommentView extends Component {
       fontSize: '14px',
       borderBottom: '1px solid lightgray',
       color: 'rgb(79, 79, 79)'
+    },
+    deleteButtonStyle: {
+      borderWidth: '0px'
+    },
+    editButtonStyle: {
+      borderWidth: '0px'
+    },
+    commentEditorBox: {
+      marginBottom: '12px',
+      borderBottom: '1px solid lightgray',
     }
   }
   render() {
     return (
       <div>
-        <div className="top-line" style={this.styles.topLineStyle}>
+        <div style={this.styles.topLineStyle}>
           <div style={this.styles.commentHeadingStyle}>
-            {this.props.comment && this.props.comment.author && this.props.comment.author} |
-            {this.props.comment && this.props.comment && new Date(this.props.comment.timestamp).toDateString()} |
+            {this.props.comment && this.props.comment.author && this.props.comment.author}
+            <span> | </span>
+            {this.props.comment && this.props.comment && new Date(this.props.comment.timestamp).toDateString()}
+            <span> | </span>
             <span style={this.styles.commentVoteLineStyle}><span>
                 {this.props.comment &&
                 this.props.comment.voteScore} votes </span>
-              <span role={'img'} aria-label="Up vote">
+              <span aria-label="Up vote" style={{paddingLeft:'4px', paddingRight:'4px'}}>
                 <UpvoteCommentView id={this.props.comment.id} parent={this.props.comment.parentId}/>
-              </span> <span role={'img'} aria-label="Down vote">
+              </span>
+              <span> </span>
+              <span aria-label="Down vote">
                 <DownvoteCommentView id={this.props.comment.id} parent={this.props.comment.parentId}/>
               </span>
             </span>
           </div>
-          <div style={this.styles.editButtonStyle}>
-            <span style={this.styles.editIconStyle}>
-              <span aria-label="Edit comment">
-                <button
-                  onMouseEnter={this.handleMouseEnterDelete}
-                  onMouseLeave={this.handleMouseLeave}
-                  style={{borderWidth: '0px'}}
-                  onClick={() => this.deleteComment()}>
-                  Delete
-                </button>
-                <button
-                  onMouseEnter={this.handleMouseEnter}
-                  onMouseLeave={this.handleMouseLeave}
-                  style={{borderWidth: '0px'}}
-                  onClick={() => this.openEditor()}>
-                  Edit
-                </button>
-              </span>
-            ︎</span>
+          <div style={this.styles.buttonRowStyle}>
+            <button
+              onMouseEnter={this.handleMouseEnterDelete}
+              onMouseLeave={this.handleMouseLeave}
+              style={this.styles.deleteButtonStyle}
+              onClick={() => this.deleteComment()}>
+              Delete
+            </button>
+            <button
+              onMouseEnter={this.handleMouseEnter}
+              onMouseLeave={this.handleMouseLeave}
+              style={this.styles.editButtonStyle}
+              onClick={() => this.openEditor()}>
+              Edit
+            </button>
           </div>
         </div>
         <div className="story" style={this.styles.commentStoryStyle}>
@@ -113,8 +123,7 @@ class CommentView extends Component {
           this.props.comment.body &&
           this.props.comment.body}
         </div>
-        <div style={{marginBottom: '12px',
-          borderBottom: '1px solid lightgray',
+        <div style={{...this.styles.commentEditorBox,
           display: this.state.editorOpen ? 'block' : 'none'}}>
           <CommentEditorView
             id={this.props.comment.id}

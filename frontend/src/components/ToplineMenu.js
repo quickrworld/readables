@@ -41,42 +41,54 @@ class ToplineMenu extends Component {
     event.target.style.color = 'rgb(0,0,0)'
     event.target.style.borderRadius = '4px'
   }
-  render() {
-    const topLineStyle = {
+  styles = {
+    topLineStyle: {
       display: 'grid',
       gridTemplateColumns: '1fr 1fr',
       gridTemplateRows: 'auto minmax(min-content, min-content)',
       paddingBottom: '6px',
-    }
-    const sortLineStyle = {
+    },
+    sortLineStyle: {
       gridColumnStart: '1',
       gridColumnEnd: '2',
-    }
-    const newReadableButtonStyle = {
+    },
+    buttonBoxStyle: {
       gridColumnStart: '2',
       gridColumnEnd: '3',
       textAlign: 'right'
+    },
+    newReadableButtonStyle: {
+      borderWidth: '0px',
+      borderColor: 'rgb(255,255,255)',
+      pointerStyle: 'pointer'
+    },
+    sortLinkStyle: {
+      'cursor': 'pointer',
     }
+  }
+  render() {
     const sortLinkStyle = {
       'cursor': 'pointer',
     }
     return (
-      <div className="top-line" style={topLineStyle}>
-        <div style={sortLineStyle}>
+      <div style={this.styles.topLineStyle}>
+        <div style={this.styles.sortLineStyle}>
           <span ref={(span) => { this.newest = span }}
                 onClick={this.sortNewest} style={sortLinkStyle}>
-            Newest</span> | <span ref={(span) => { this.oldest = span }} onClick={this.sortOldest} style={sortLinkStyle}>
-            Oldest</span> | <span ref={(span) => { this.topvoted = span }} onClick={this.sortTopvoted} style={sortLinkStyle}>
+            Newest</span>
+          <span> | </span>
+          <span ref={(span) => { this.oldest = span }} onClick={this.sortOldest} style={this.styles.sortLinkStyle}>
+            Oldest</span>
+          <span> | </span>
+          <span ref={(span) => { this.topvoted = span }} onClick={this.sortTopvoted} style={this.styles.sortLinkStyle}>
             Top voted</span>
           <hr/>
         </div>
-        <div style={newReadableButtonStyle}>
+        <div style={this.styles.buttonBoxStyle}>
           <button onMouseEnter={this.handleMouseEnter}
                   onMouseLeave={this.handleMouseLeave}
                   onClick={() => this.openEditor()}
-                  style={{borderWidth: '0px',
-                    borderColor: 'rgb(255,255,255)',
-                    pointerStyle: 'pointer'}}>New Readable</button>
+                  style={this.styles.newReadableButtonStyle}>New Readable</button>
           <hr/>
         </div>
         <div style={{display: this.state.editorOpen ? 'block' : 'none', gridColumnStart:'1', gridColumnEnd: '5'}}>

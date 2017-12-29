@@ -36,13 +36,17 @@ class CommentToplineMenu extends Component {
   }
   render() {
     return (
-      <div className="comment-top-line" style={this.styles.commentTopLineStyle}>
+      <div style={this.styles.commentTopLineStyle}>
         <div style={this.styles.sortLineStyle}>
           <span ref={(span) => { this.newest = span }}
                 onClick={this.sortNewest} style={this.styles.sortLinkStyle}>
-            Newest</span> | <span ref={(span) => { this.oldest = span }}
+            Newest</span>
+          <span> | </span>
+          <span ref={(span) => { this.oldest = span }}
                                   onClick={this.sortOldest} style={this.styles.sortLinkStyle}>
-            Oldest</span> | <span ref={(span) => { this.topvoted = span }}
+            Oldest</span>
+          <span> | </span>
+          <span ref={(span) => { this.topvoted = span }}
                                   onClick={this.sortTopvoted} style={this.styles.sortLinkStyle}>
             Top voted</span>
           <hr/>

@@ -67,7 +67,7 @@ function mapStateToProps(state, ownProps) {
   return { comments, selectedReadable }
 }
 
-function sortCommentsArray(comments, order) {
+function sortCommentsArray(comments, order) { // sortBy?
   function compare(c1, c2) {
     if (order === SORT_COMMENTS_NEWEST) {
       return (c1.timestamp < c2.timestamp) ? 1 : -1
