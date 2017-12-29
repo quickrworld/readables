@@ -208,47 +208,17 @@ class ReadableViewWithComments extends Component {
 function mapStateToProps(state, ownProps) {
   const id = ownProps.id
   const {readableById} = state
-  // const title = readableById &&
-  //   readableById[id] &&
-  //   readableById[id].readable &&
-  //   readableById[id].readable.title
-  // const author = readableById &&
-  //   readableById[id] &&
-  //   readableById[id].readable &&
-  //   readableById[id].readable.author
-  // const category = readableById &&
-  //   readableById[id] &&
-  //   readableById[id].readable &&
-  //   readableById[id].readable.category
-  // const timestamp = readableById &&
-  //   readableById[id] &&
-  //   readableById[id].readable &&
-  //   readableById[id].readable.timestamp && new Date(
-  //     readableById[id].readable.timestamp).toDateString()
-  // const commentCount = readableById &&
-  //   readableById[id] &&
-  //   readableById[id].readable &&
-  //   readableById[id].readable.commentCount
-  // const voteScore = readableById &&
-  //   readableById[id] &&
-  //   readableById[id].readable &&
-  //   readableById[id].readable.voteScore
-  // const body = readableById &&
-  //   readableById[id] &&
-  //   readableById[id].readable &&
-  //   readableById[id].readable.body
-  // const deleted = readableById &&
-  //   readableById[id] &&
-  //   readableById[id].readable &&
-  //   readableById[id].readable.deleted
+  const readable =
+          readableById &&
+          readableById[id] &&
+          readableById[id].readable
+        ? readableById &&
+          readableById[id] &&
+          readableById[id].readable
+        : {}
 
-//   const { readable } = !!readableById[id] ? readableById[id] : {}
-//   const title = readable.title || 'default' // or readable.title ? readable.title : 'default'
-
-  const { readable } = !!readableById[id] ? readableById[id] : {}
   const {title, author, category, body, voteScore, commentCount, timestamp, deleted } = readable
 
-  // const readable = readableById && readableById[id] && readableById[id].readable
   if(!readable) {
     return { id, check: '404' }
   }
