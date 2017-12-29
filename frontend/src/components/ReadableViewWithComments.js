@@ -44,34 +44,34 @@ class ReadableViewWithComments extends Component {
   deleteReadable = () => {
     this.props.deleteReadable(this.props.id)
   }
-  render() {
-    const topLineStyle = {
+  styles = {
+    topLineStyle: {
       display: 'grid',
       gridTemplateColumns: '1fr 1fr',
       gridTemplateRows: 'auto minmax(min-content, min-content)',
       paddingBottom: '6px',
-    }
-    const titleStyle = {
+    },
+    titleStyle: {
       gridColumnStart: '1',
       gridColumnEnd: '2',
       fontSize: '18px',
       color: 'rgb(79, 79, 79)'
-    }
-    const editIconStyle = {
+    },
+    editIconStyle: {
       fontSize: '12pt',
       color: 'rgb(79, 79, 79)',
       borderWidth: '0px'
-    }
-    const voteStyle = {
+    },
+    voteStyle: {
       whiteSpace: 'nowrap',
       color: 'rgb(79, 79, 79)'
-    }
-    const headlineStyle = {
+    },
+    headlineStyle: {
       gridColumnStart: '1',
       gridColumnEnd: '3',
       color: 'rgb(79, 79, 79)'
-    }
-    const storyStyle = {
+    },
+    storyStyle: {
       gridColumnStart: '1',
       gridColumnEnd: '3',
       padding: '12px 0px 12px 0px',
@@ -79,7 +79,9 @@ class ReadableViewWithComments extends Component {
       borderBottom: '1px solid lightgray',
       color: 'rgb(79, 79, 79)'
     }
-    if(this.props.deleted === true) {
+  }
+  render() {
+    if (this.props.deleted === true) {
       return <div
         style={{
           border: '1px solid lightgray',
@@ -107,7 +109,8 @@ class ReadableViewWithComments extends Component {
                      onMouseLeave={this.handleMouseLeave}>write your own
             </NavLink>
           </span>
-        </p>      </div>
+        </p>
+      </div>
     }
     if (this.props.check === '404') {
       return <div
@@ -143,8 +146,8 @@ class ReadableViewWithComments extends Component {
     }
     return (
       <div>
-        <div className="top-line" style={topLineStyle}>
-          <div style={titleStyle}>
+        <div className="top-line" style={this.styles.topLineStyle}>
+          <div style={this.styles.titleStyle}>
             {this.props.title}
           </div>
           <div style={{
@@ -152,7 +155,7 @@ class ReadableViewWithComments extends Component {
             gridColumnEnd: '3',
             textAlign: 'right',
             alignContent: 'center'}}>
-            <span style={editIconStyle}>
+            <span style={this.styles.editIconStyle}>
               <button
                 onMouseEnter={this.handleMouseEnterDelete}
                 onMouseLeave={this.handleMouseLeave}
@@ -169,18 +172,21 @@ class ReadableViewWithComments extends Component {
               </button>
             </span>
           </div>
-          <div style={headlineStyle}>
+          <div style={this.styles.headlineStyle}>
             {this.props.author} |
-            {new Date(this.props.timestamp).toDateString()} | <span style={{whiteSpace: 'nowrap'}}>{this.props.commentCount} Comments</span> |
-            <span style={voteStyle}><span>{this.props.voteScore} votes </span>
-              <span aria-label="Up vote">
+            {new Date(this.props.timestamp).toDateString()}
+            <span> | </span>
+            <span style={{whiteSpace: 'nowrap'}}>{this.props.commentCount} Comments</span>
+            <span> | </span>
+            <span style={this.styles.voteStyle}><span>{this.props.voteScore} votes </span>
+              <span aria-label="Up vote" style={{paddingLeft: '4px', paddingRight:'4px'}}>
                 <UpvoteReadableView readable={this.props.readable}/>
               </span> <span aria-label="Down vote">
                 <DownvoteReadableView readable={this.props.readable}/>
               </span>
             </span>
           </div>
-          <div className="story" style={storyStyle}>
+          <div className="story" style={this.styles.storyStyle}>
             {this.props.body}
           </div>
           <div style={{
