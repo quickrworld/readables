@@ -15,7 +15,6 @@ class CommentView extends Component {
     this.setState({editorOpen: false})
   }
   deleteComment = () => {
-    // TODO
     this.props.deleteComment(this.props.comment)
   }
   handleMouseEnter = (event) => {
@@ -33,36 +32,36 @@ class CommentView extends Component {
     event.target.style.color = 'rgb(0,0,0)'
     event.target.style.borderRadius = '4px'
   }
-  render() {
-    const topLineStyle = {
+  styles = {
+    topLineStyle: {
       display: 'grid',
       gridTemplateColumns: '1fr 1fr 1fr 1fr',
       gridTemplateRows: 'auto minmax(min-content, min-content)',
       paddingBottom: '6px',
-    }
-    const commentHeadingStyle = {
+    },
+    commentHeadingStyle: {
       gridColumnStart: '1',
       gridColumnEnd: '4',
       color: 'rgb(79, 79, 79)',
       alignContent: 'center',
       paddingTop: '12px'
-    }
-    const commentVoteLineStyle = {
+    },
+    commentVoteLineStyle: {
       whiteSpace: 'nowrap',
       color: 'rgb(79, 79, 79)'
-    }
-    const editButtonStyle = {
+    },
+    editButtonStyle: {
       gridColumnStart: '4',
       gridColumnEnd: '5',
       textAlign: 'right',
       alignContent: 'center',
       paddingTop: '12px'
-    }
-    const editIconStyle = {
+    },
+    editIconStyle: {
       fontSize: '12pt',
       color: 'rgb(79, 79, 79)'
-    }
-    const commentStoryStyle = {
+    },
+    commentStoryStyle: {
       gridColumnStart: '1',
       gridColumnEnd: '3',
       padding: '0px 0px 12px 0px',
@@ -70,13 +69,15 @@ class CommentView extends Component {
       borderBottom: '1px solid lightgray',
       color: 'rgb(79, 79, 79)'
     }
+  }
+  render() {
     return (
       <div>
-        <div className="top-line" style={topLineStyle}>
-          <div style={commentHeadingStyle}>
+        <div className="top-line" style={this.styles.topLineStyle}>
+          <div style={this.styles.commentHeadingStyle}>
             {this.props.comment && this.props.comment.author && this.props.comment.author} |
             {this.props.comment && this.props.comment && new Date(this.props.comment.timestamp).toDateString()} |
-            <span style={commentVoteLineStyle}><span>
+            <span style={this.styles.commentVoteLineStyle}><span>
                 {this.props.comment &&
                 this.props.comment.voteScore} votes </span>
               <span role={'img'} aria-label="Up vote">
@@ -86,8 +87,8 @@ class CommentView extends Component {
               </span>
             </span>
           </div>
-          <div style={editButtonStyle}>
-            <span style={editIconStyle}>
+          <div style={this.styles.editButtonStyle}>
+            <span style={this.styles.editIconStyle}>
               <span aria-label="Edit comment">
                 <button
                   onMouseEnter={this.handleMouseEnterDelete}
@@ -107,12 +108,14 @@ class CommentView extends Component {
             ︎</span>
           </div>
         </div>
-        <div className="story" style={commentStoryStyle}>
+        <div className="story" style={this.styles.commentStoryStyle}>
           {this.props.comment &&
           this.props.comment.body &&
           this.props.comment.body}
         </div>
-        <div style={{marginBottom: '12px', borderBottom: '1px solid lightgray', display: this.state.editorOpen ? 'block' : 'none'}}>
+        <div style={{marginBottom: '12px',
+          borderBottom: '1px solid lightgray',
+          display: this.state.editorOpen ? 'block' : 'none'}}>
           <CommentEditorView
             id={this.props.comment.id}
             author={this.props.comment.author}

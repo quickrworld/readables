@@ -116,24 +116,67 @@ class ReadableEditorView extends Component {
   handleStoryChange = (event) => {
     this.setState({story: event.target.value});
   }
-
-  render() {
-    const editorStyle = {
+  styles = {
+    editorStyle: {
       display: 'grid',
       gridTemplateColumns: '1fr 1fr 1fr 1fr',
       gridTemplateRows: 'auto minmax(min-content, min-content)',
       paddingTop: '12px',
       paddingBottom: '24px',
       borderBottom: '1px solid lightgray'
+    },
+    authorLabelStyle: {
+      paddingRight: '4px'
+    },
+    categoryLabelStyle: {
+      paddingLeft: '12px',
+      paddingRight: '4px'
+    },
+    titleLabelStyle: {
+      paddingLeft: '12px',
+      paddingRight: '4px'
+    },
+    storyBoxStyle: {
+      gridRow: '3',
+      gridColumnStart: '1',
+      gridColumnEnd: '5',
+      paddingTop: '12px',
+      marginRight: '12px'
+    },
+    textareaStyle: {
+      border: '1px solid lightgray',
+      overflowY: 'auto',
+      width: '100%',
+      outline: 'none',
+      boxShadow: 'none',
+      resize: 'none'
+    },
+    buttonRowStyles: {
+      justifySelf: 'end', paddingRight: '6px'
+    },
+    errorMessageStyle: {
+      gridRow: '4',
+      gridColumnStart: '1',
+      gridColumnEnd: '3',
+      padding: '0px, 6px, 0px, 6px',
+      color: 'red'
+    },
+    errorButtonStyle: {
+      fontSize: '14px',
+      alignContent: 'center',
+      border: '0px',
+      color: 'red'
     }
+  }
+  render() {
     return (
-      <div style={editorStyle}>
+      <div style={this.styles.editorStyle}>
         <div style={{
           gridRow: '1',
           gridColumnStart: '1',
           gridColumnEnd: '5',
         }}>
-          <span style={{paddingRight: '4px'}}>Authored by </span>
+          <span style={this.styles.authorLabelStyle}>Authored by </span>
           <input
             type="text"
             onChange={this.handleAuthorChange}
@@ -141,7 +184,7 @@ class ReadableEditorView extends Component {
             placeholder={'Author'}
             value={this.state.author ? this.state.author : ''}
           />
-          <span style={{paddingLeft: '12px', paddingRight: '4px'}}>Category </span>
+          <span style={this.styles.categoryLabelStyle}>Category </span>
           <select name='categorySelector'
                   onChange={this.handleCategoryChange}
                   disabled={!!this.state.id}
@@ -152,7 +195,7 @@ class ReadableEditorView extends Component {
               return <option key={category.path} value={category.path}>{category.name}</option>
             })}
           </select>
-          <span style={{paddingLeft: '12px', paddingRight: '4px'}}>Title </span>
+          <span style={this.styles.titleLabelStyle}>Title </span>
           <input
             type="text"
             onChange={this.handleTitleChange}
@@ -161,27 +204,14 @@ class ReadableEditorView extends Component {
             value={this.state.title ? this.state.title : ''}
           />
         </div>
-        <div style={{
-          gridRow: '3',
-          gridColumnStart: '1',
-          gridColumnEnd: '5',
-          paddingTop: '12px',
-          marginRight: '12px'
-        }}>
-        <textarea
-          onChange={this.handleStoryChange} name={'story'} rows={'5'} placeholder={'Your story'}
-          value={this.state.story ? this.state.story : ''}
-          style={{
-            border: '1px solid lightgray',
-            overflowY: 'auto',
-            width: '100%',
-            outline: 'none',
-            boxShadow: 'none',
-            resize: 'none'
-          }}>
-        </textarea>
+        <div style={this.styles.storyBoxStyle}>
+          <textarea
+            onChange={this.handleStoryChange} name={'story'} rows={'5'} placeholder={'Your story'}
+            value={this.state.story ? this.state.story : ''}
+            style={this.styles.textareaStyle}>
+          </textarea>
         </div>
-        <div style={{gridRow: '4', gridColumnStart: '4', justifySelf: 'end', paddingRight: '6px'}}>
+        <div style={{gridRow: '4', gridColumnStart: '4', ...this.styles.buttonRowStyles}}>
           <button onMouseEnter={this.handleMouseEnter}
                   onMouseLeave={this.handleMouseLeave}
                   onClick={this.props.close}
@@ -194,19 +224,10 @@ class ReadableEditorView extends Component {
           </button>
         </div>
         {this.state.errorMessage &&
-        <div style={{
-          gridRow: '4',
-          gridColumnStart: '1',
-          gridColumnEnd: '3',
-          padding: '0px, 6px, 0px, 6px',
-          color: 'red'}}>
+        <div style={this.styles.errorMessageStyle}>
           {this.state.errorMessage}
           {this.state.errorMessage &&
-          <button style={{
-            fontSize: '14px',
-            alignContent: 'center',
-            border: '0px',
-            color: 'red'}}
+          <button style={this.styles.errorButtonStyle}
                   onClick={() => this.setState({errorMessage: ''})}>&#x24e7;</button>}
         </div>}
       </div>
@@ -219,7 +240,9 @@ function mapStateToProps(state) {
   if (allCategories && allCategories.items) {
     const keys = Object.keys(allCategories.items)
     const categories = keys.reduce((categories, category) => {
-      // remember push returns count of items pushed. Or use concat?
+      // remember push returns count of items pushed.
+      // so we must return the variable in the following statement
+      // Or use concat?
       categories.push(allCategories.items[category])
       return categories
     }, [])

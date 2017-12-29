@@ -16,7 +16,6 @@ class ReadablesListView extends Component {
   }
   componentWillReceiveProps(nextProps) {
     if(this.props.myCategory !== nextProps.myCategory) {
-      //this.props.selectCategory(nextProps.category)
       this.props.selectCategory(nextProps.myCategory)
       this.props.fetchReadables(nextProps.myCategory)
     }

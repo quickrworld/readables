@@ -7,10 +7,14 @@ class DownvoteCommentView extends Component {
   downvote = () => {
     this.props.downvoteComment(this.props.id)
   }
+  styles = {
+    pointerStyle: {
+      cursor: 'pointer'
+    }
+  }
   render() {
-    const pointerStyle = { 'cursor': 'pointer' }
     return (
-      <span onClick={this.downvote} style={pointerStyle}>
+      <span onClick={this.downvote} style={this.styles.pointerStyle}>
         <FaThumbsODown/>
       </span>
     )

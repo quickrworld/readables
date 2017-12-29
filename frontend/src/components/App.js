@@ -13,6 +13,58 @@ import '../App.css'
 import ReadableViewWithComments from "./ReadableViewWithComments"
 
 class App extends Component {
+  styles = {
+    gridStyle: {
+      fontFamily: 'Open Sans',
+      fontSize: '12px',
+      display: 'grid',
+      width: '100%',
+      height: '100vh',
+      gridTemplateColumns: '20rem 1fr',
+    },
+    sidebarStyle: {
+      fontFamily: 'Open Sans',
+      fontSize: '10px',
+      backgroundColor: 'rgb(47,61,72)',
+      zIndex: '20',
+      display: 'grid',
+      gridTemplateRows: '70px 1fr',
+    },
+    bylineStyle: {
+      fontFamily: 'Open Sans',
+      fontSize: '12px',
+      color: 'rgba(255,255,255,.5)',
+      padding: '0px 10px 10px 24px',
+      fontWeight: '100',
+    },
+    sidebarMainStyle: {
+      display: 'grid',
+      gridTemplateRows: 'auto',
+      backgroundColor: 'rgb(47,61,72)',
+      padding: '0px 20px 0px 20px',
+      height: 'calc(100vh - 77px)',
+      overflow: 'auto',
+    },
+    contentStyle: {
+      display: 'grid',
+      gridTemplateRows: '57px 1fr',
+    },
+    contentMainStyle: {
+      display: 'grid',
+      gridTemplateRows: 'auto',
+      backgroundColor: 'rgb(28,38,47)',
+      padding: '0px 20px 0px 20px',
+      height: 'calc(100vh - 57px)',
+      overflow: 'auto',
+    },
+    mainContentStyle: {
+      backgroundColor: 'rgb(255,255,255)',
+      display: 'grid',
+      height: '100%',
+      padding: '20px',
+      gridTemplateRows: 'minmax(min-content, min-content)',
+    }
+  }
   componentDidMount() {
     this.props.fetchCategories()
     if(this.props.myCategory) {
@@ -21,60 +73,10 @@ class App extends Component {
     }
   }
   render() {
-    const gridStyle = {
-      fontFamily: 'Open Sans',
-      fontSize: '12px',
-      display: 'grid',
-      width: '100%',
-      height: '100vh',
-      gridTemplateColumns: '20rem 1fr',
-    }
-    const sidebarStyle = {
-      fontFamily: 'Open Sans',
-      fontSize: '10px',
-      backgroundColor: 'rgb(47,61,72)',
-      zIndex: '20',
-      display: 'grid',
-      gridTemplateRows: '70px 1fr',
-    }
-    const bylineStyle = {
-      fontFamily: 'Open Sans',
-      fontSize: '12px',
-      color: 'rgba(255,255,255,.5)',
-      padding: '0px 10px 10px 24px',
-      fontWeight: '100',
-    }
-    const sidebarMainStyle = {
-      display: 'grid',
-      gridTemplateRows: 'auto',
-      backgroundColor: 'rgb(47,61,72)',
-      padding: '0px 20px 0px 20px',
-      height: 'calc(100vh - 77px)',
-      overflow: 'auto',
-    }
-    const contentStyle = {
-      display: 'grid',
-      gridTemplateRows: '57px 1fr',
-    }
-    const contentMainStyle = {
-      display: 'grid',
-      gridTemplateRows: 'auto',
-      backgroundColor: 'rgb(28,38,47)',
-      padding: '0px 20px 0px 20px',
-      height: 'calc(100vh - 57px)',
-      overflow: 'auto',
-    }
-    const mainContentStyle = {
-      backgroundColor: 'rgb(255,255,255)',
-      display: 'grid',
-      height: '100%',
-      padding: '20px',
-      gridTemplateRows: 'minmax(min-content, min-content)',
-    }
     return (
       <Router>
-        <div id={'grid'} style={gridStyle}>
-        <div id="sidebar" style={sidebarStyle}>
+        <div id={'grid'} style={this.styles.gridStyle}>
+        <div id="sidebar" style={this.styles.sidebarStyle}>
           <div id="logo" style={{
             fontWeight: 'lighter',
             borderBottom: '1px solid rgb(28,38,47)',
@@ -87,20 +89,20 @@ class App extends Component {
             }}>
               Readable
             </div>
-            <div style={bylineStyle}>
+            <div style={this.styles.bylineStyle}>
               For those who haven't Reddit
             </div>
           </div>
-          <div className="sidebar-main" style={sidebarMainStyle}>
+          <div className="sidebar-main" style={this.styles.sidebarMainStyle}>
             <div>
               <CategoriesListView/>
             </div>
           </div>
         </div>
-        <div style={contentStyle}>
+        <div style={this.styles.contentStyle}>
           <ContentHeader myCategory={this.props.category}/>
-          <div className="content-main" style={contentMainStyle}>
-            <div className="main-content" style={mainContentStyle}>
+          <div className="content-main" style={this.styles.contentMainStyle}>
+            <div className="main-content" style={this.styles.mainContentStyle}>
               <div>
                 <Route exact={true} path={'/'} render={() => (
                   <div>

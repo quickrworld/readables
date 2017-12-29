@@ -18,8 +18,8 @@ class ContentHeader extends Component {
       errorMessage: nextProps.errorMessage
     }));
   }
-  render() {
-    const contentHeaderStyle = {
+  styles = {
+    contentHeaderStyle: {
       backgroundColor: 'rgb(28,38,47)',
       boxShadow: 'rgba(0,0,0,0.5) 0px 2px 4px 0px',
       zIndex: '10',
@@ -32,27 +32,33 @@ class ContentHeader extends Component {
       fontWeight: 200,
       display: 'grid',
       gridTemplateColumns: '1fr, 1fr, 1fr'
+    },
+    errorButtonStyle: {
+      fontSize: '14px',
+      padding: '4px 12px 12px 12px',
+      alignContent: 'center',
+      border: '0px',
+      backgroundColor: 'rgba(255,255,255,0)',
+      color: 'white'
+    },
+    errorMessageStyle: {
+      fontSize: '14px',
+      color: 'red',
+      gridColumnStart:'3',
+      gridColumnEnd:'4',
+      textAlign: 'right'
     }
+  }
+  render() {
     return (
-      <div id="content-header" style={contentHeaderStyle}>
+      <div id="content-header" style={this.styles.contentHeaderStyle}>
         <div style={{gridColumnStart:'2', gridColumnEnd:'3', textAlign: 'center'}}>
           {this.props.category}
         </div>
-        <div style={{
-          fontSize: '14px',
-          color: 'red',
-          gridColumnStart:'3',
-          gridColumnEnd:'4',
-          textAlign: 'right'}}>
+        <div style={this.styles.errorMessageStyle}>
           {this.state.errorMessage && `${this.state.errorMessage}`}
           {this.state.errorMessage &&
-          <button style={{
-                    fontSize: '14px',
-                    padding: '4px 12px 12px 12px',
-                    alignContent: 'center',
-                    border: '0px',
-                    backgroundColor: 'rgba(255,255,255,0)',
-                    color: 'white'}}
+          <button style={this.styles.errorButtonStyle}
                   onClick={() => this.setState({errorMessage: '', counter: 0})}>&#x24e7;</button>}
         </div>
       </div>

@@ -248,8 +248,6 @@ export function fetchCommentsRequest(readable) {
 }
 
 export function fetchCommentsSuccess(readable, response) {
-  console.log('readable', readable)
-  console.log('response', response)
   const comments = response.reduce((comments, comment) => {
     comments[comment.id] = comment
     return comments

@@ -76,22 +76,58 @@ class CommentEditorView extends Component {
       this.props.close()
     }
   }
-
-  render() {
-    const editorStyle = {
+  styles = {
+    editorStyle: {
       display: 'grid',
       gridTemplateColumns: '1fr 1fr 1fr 1fr',
       gridTemplateRows: 'auto minmax(min-content, min-content)',
       paddingTop: '12px',
       paddingBottom: '24px',
+    },
+    commentLabelStyle: {
+      paddingRight: '4px'
+    },
+    textareaStyle: {
+      paddingTop: '12px',
+      marginRight: '12px'
+    },
+    commentStyle: {
+      border: '1px solid lightgray',
+      overflowY: 'auto',
+      width: '100%',
+      outline: 'none',
+      boxShadow: 'none',
+      resize: 'none'
+    },
+    buttonRowStyle: {
+      justifySelf: 'end',
+      paddingRight: '6px'
+    },
+    closeButtonStyle: {
+      display: !this.props.id ? 'none':'default',
+      align:'right',
+      borderWidth: '0px'
+    },
+    commentButtonStyle: {
+      align:'right',
+      borderWidth: '0px'
+    },
+    errorMessageStyle: {
+      padding: '0px, 6px, 0px, 6px',
+      color: 'red'
+    },
+    errorButtonStyle: {
+      fontSize: '14px',
+      alignContent: 'center',
+      border: '0px',
+      color: 'red'
     }
+  }
+  render() {
     return (
-      <div style={editorStyle}>
-        <div style={{
-          gridRow: '1',
-          gridColumnStart: '1',
-          gridColumnEnd: '5',
-        }}><span style={{paddingRight: '4px'}}>Comment as </span>
+      <div style={this.styles.editorStyle}>
+        <div style={{gridRow: '1', gridColumnStart: '1', gridColumnEnd: '5',}}>
+          <span style={this.styles.commentLabelStyle}>Comment as </span>
           <input
             type="text"
             onChange={this.handleAuthorChange}
@@ -100,49 +136,32 @@ class CommentEditorView extends Component {
             value={this.state.author ? this.state.author : ''}
           />
         </div>
-        <div style={{
-          gridRow: '2',
-          gridColumnStart: '1',
-          gridColumnEnd: '5',
-          paddingTop: '12px',
-          marginRight: '12px'
-        }}>
+        <div style={{gridRow: '2', gridColumnStart: '1', gridColumnEnd: '5', ...this.styles.textareaStyle, }}>
           <textarea
             onChange={this.handleCommentChange} name={'story'} rows={'5'} placeholder={'Your story'}
             value={this.state.comment ? this.state.comment : ''}
-            style={{
-              border: '1px solid lightgray',
-              overflowY: 'auto',
-              width: '100%',
-              outline: 'none',
-              boxShadow: 'none',
-              resize: 'none'
-            }}>
+            style={this.styles.commentStyle}>
           </textarea>
         </div>
-        <div style={{gridRow:'3', gridColumnStart:'4', justifySelf: 'end', paddingRight: '6px'}}>
+        <div style={{gridRow:'3', gridColumnStart:'4', ...this.styles.buttonRowStyle, }}>
           <button
             onMouseEnter={this.handleMouseEnter}
             onMouseLeave={this.handleMouseLeave}
             onClick={this.props.close}
-            style={{display: !this.props.id ? 'none':'default',
-              align:'right', borderWidth: '0px'}}>Close</button>
+            style={this.styles.closeButtonStyle}>Close</button>
           <button
             onMouseEnter={this.handleMouseEnter}
             onMouseLeave={this.handleMouseLeave}
             onClick={this.props.id ? this.editComment : this.addComment}
-            style={{align:'right', borderWidth: '0px'}}>Comment</button>
+            style={this.styles.commentButtonStyle}>Comment</button>
         </div>
         {this.state.errorMessage &&
-        <div style={{gridRow: '4', gridColumnStart: '1', padding: '0px, 6px, 0px, 6px', color: 'red'}}>
+        <div style={{gridRow: '3', gridColumnStart: '1', ...this.styles.errorMessageStyle}}>
           {this.state.errorMessage}
           {this.state.errorMessage &&
-          <button style={{
-            fontSize: '14px',
-            alignContent: 'center',
-            border: '0px',
-            color: 'red'}}
-                  onClick={() => this.setState({errorMessage: ''})}>&#x24e7;</button>}
+          <button
+            style={this.styles.errorButtonStyle}
+            onClick={() => this.setState({errorMessage: ''})}>&#x24e7;</button>}
         </div>}
       </div>
     )

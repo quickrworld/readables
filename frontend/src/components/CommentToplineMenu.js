@@ -21,19 +21,29 @@ class CommentToplineMenu extends Component {
     this.topvoted.style.color = 'rgba(0,0,0,0.8)'
     this.props.sortTopvoted()
   }
+  styles = {
+    sortLineStyle: {
+      gridColumnStart: '1',
+      gridColumnEnd: '2',
+      cursor: 'pointer'
+    },
+    commentTopLineStyle: {
+      display: 'grid',
+      gridTemplateColumns: '1fr',
+      gridTemplateRows: 'auto minmax(min-content, min-content)',
+      paddingBottom: '6px'
+    }
+  }
   render() {
-    const sortLineStyle = {gridColumnStart: '1', gridColumnEnd: '2'}
-    const sortLinkStyle = {'cursor': 'pointer'}
     return (
-      <div className="comment-top-line" style={{
-        display: 'grid',
-        gridTemplateColumns: '1fr',
-        gridTemplateRows: 'auto minmax(min-content, min-content)',
-        paddingBottom: '6px'}}>
-        <div style={sortLineStyle}>
-          <span  ref={(span) => { this.newest = span }} onClick={this.sortNewest} style={sortLinkStyle}>
-            Newest</span> | <span  ref={(span) => { this.oldest = span }} onClick={this.sortOldest} style={sortLinkStyle}>
-            Oldest</span> | <span  ref={(span) => { this.topvoted = span }} onClick={this.sortTopvoted} style={sortLinkStyle}>
+      <div className="comment-top-line" style={this.styles.commentTopLineStyle}>
+        <div style={this.styles.sortLineStyle}>
+          <span ref={(span) => { this.newest = span }}
+                onClick={this.sortNewest} style={this.styles.sortLinkStyle}>
+            Newest</span> | <span ref={(span) => { this.oldest = span }}
+                                  onClick={this.sortOldest} style={this.styles.sortLinkStyle}>
+            Oldest</span> | <span ref={(span) => { this.topvoted = span }}
+                                  onClick={this.sortTopvoted} style={this.styles.sortLinkStyle}>
             Top voted</span>
           <hr/>
         </div>

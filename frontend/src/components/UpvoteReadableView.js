@@ -7,12 +7,15 @@ class UpvoteReadableView extends Component {
   upvote = () => {
     this.props.upvoteReadable(this.props.readable.id)
   }
-  render() {
-    const pointerStyle = {
+  styles = {
+    pointerStyle: {
       cursor: 'pointer'
     }
+  }
+  render() {
+
     return (
-      <span onClick={this.upvote} style={pointerStyle}>
+      <span onClick={this.upvote} style={this.styles.pointerStyle}>
         <FaThumbsOUp/>
       </span>
     )
