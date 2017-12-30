@@ -27,21 +27,6 @@ class ReadableViewWithComments extends Component {
   closeEditor = () => {
     this.setState({editorOpen: false})
   }
-  handleMouseEnter = (event) => {
-    event.target.style.backgroundColor = 'rgba(47,61,72,.8)'
-    event.target.style.color = 'rgba(255,255,255,.8)'
-    event.target.style.borderRadius = '4px'
-  }
-  handleMouseEnterDelete = (event) => {
-    event.target.style.backgroundColor = 'rgba(255,0,0,.8)'
-    event.target.style.color = 'rgba(255,255,255,.8)'
-    event.target.style.borderRadius = '4px'
-  }
-  handleMouseLeave = (event) => {
-    event.target.style.backgroundColor = 'rgb(255,255,255)'
-    event.target.style.color = 'rgb(0,0,0)'
-    event.target.style.borderRadius = '4px'
-  }
   deleteReadable = () => {
     this.props.deleteReadable(this.props.id)
   }
@@ -55,8 +40,7 @@ class ReadableViewWithComments extends Component {
             <NavLink to={{pathname: '/'}}
               style={styles.navlinkStyle}
               activeStyle={styles.navlinkActiveStyle}
-              onMouseEnter={this.handleMouseEnter}
-              onMouseLeave={this.handleMouseLeave}>browse other readables
+              className={'button-navlink'}>browse other readables
             </NavLink>
           </span>
           <span> and comment on them</span></p>
@@ -65,8 +49,7 @@ class ReadableViewWithComments extends Component {
             <NavLink to={{pathname: '/'}}
                      style={styles.navlinkStyle}
                      activeStyle={styles.navlinkActiveStyle}
-                     onMouseEnter={this.handleMouseEnter}
-                     onMouseLeave={this.handleMouseLeave}>write your own
+                     className={'button-navlink'}>write your own
             </NavLink>
           </span>
         </p>
@@ -81,8 +64,7 @@ class ReadableViewWithComments extends Component {
             <NavLink to={{pathname: '/'}}
               style={styles.navlinkStyle}
               activeStyle={styles.navlinkActiveStyle}
-              onMouseEnter={this.handleMouseEnter}
-              onMouseLeave={this.handleMouseLeave}>browse other readables
+              className={'button-navlink'}>browse other readables
             </NavLink>
           </span>
           <span> and comment on them</span>
@@ -92,8 +74,7 @@ class ReadableViewWithComments extends Component {
             <NavLink to={{pathname: '/'}}
                style={styles.navlinkStyle}
                activeStyle={styles.navlinkActiveStyle}
-               onMouseEnter={this.handleMouseEnter}
-               onMouseLeave={this.handleMouseLeave}>write your own
+               className={'button-navlink'}>write your own
             </NavLink>
           </span>
         </p>
@@ -112,15 +93,13 @@ class ReadableViewWithComments extends Component {
             alignContent: 'center'}}>
             <span style={styles.editIconStyle}>
               <button
-                onMouseEnter={this.handleMouseEnterDelete}
-                onMouseLeave={this.handleMouseLeave}
+                className={'readable-delete-button'}
                 onClick={() => this.deleteReadable()}
                 style={styles.buttonStyle}>
                 Delete
               </button>
               <button
-                onMouseEnter={this.handleMouseEnter}
-                onMouseLeave={this.handleMouseLeave}
+                className={'readable-edit-button'}
                 onClick={() => this.openEditor()}
                 style={styles.buttonStyle}>
                 Edit

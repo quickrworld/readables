@@ -19,21 +19,6 @@ class CommentView extends Component {
   deleteComment = () => {
     this.props.deleteComment(this.props.comment)
   }
-  handleMouseEnter = (event) => {
-    event.target.style.backgroundColor = 'rgba(47,61,72,.8)'
-    event.target.style.color = 'rgba(255,255,255,.8)'
-    event.target.style.borderRadius = '4px'
-  }
-  handleMouseEnterDelete = (event) => {
-    event.target.style.backgroundColor = 'rgba(255,0,0,.8)'
-    event.target.style.color = 'rgba(255,255,255,.8)'
-    event.target.style.borderRadius = '4px'
-  }
-  handleMouseLeave = (event) => {
-    event.target.style.backgroundColor = 'rgb(255,255,255)'
-    event.target.style.color = 'rgb(0,0,0)'
-    event.target.style.borderRadius = '4px'
-  }
   render() {
     return (
       <div>
@@ -57,15 +42,15 @@ class CommentView extends Component {
           </div>
           <div style={styles.buttonRowStyle}>
             <button
-              onMouseEnter={this.handleMouseEnterDelete}
-              onMouseLeave={this.handleMouseLeave}
+              className={'comment-delete-button'}
+
               style={styles.deleteButtonStyle}
               onClick={() => this.deleteComment()}>
               Delete
             </button>
             <button
-              onMouseEnter={this.handleMouseEnter}
-              onMouseLeave={this.handleMouseLeave}
+              className={'comment-edit-button'}
+
               style={styles.editButtonStyle}
               onClick={() => this.openEditor()}>
               Edit

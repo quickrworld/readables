@@ -89,16 +89,6 @@ class ReadableEditorView extends Component {
       errorMessage: '',
     }
   }
-  handleMouseEnter = (event) => {
-    event.target.style.backgroundColor = 'rgba(47,61,72,.8)'
-    event.target.style.color = 'rgba(255,255,255,.8)'
-    event.target.style.borderRadius = '4px'
-  }
-  handleMouseLeave = (event) => {
-    event.target.style.backgroundColor = 'rgb(255,255,255)'
-    event.target.style.color = 'rgb(0,0,0)'
-    event.target.style.borderRadius = '4px'
-  }
   handleAuthorChange = (event) => {
     this.setState({author: event.target.value});
   }
@@ -154,13 +144,13 @@ class ReadableEditorView extends Component {
           </textarea>
         </div>
         <div style={{gridRow: '4', gridColumnStart: '4', ...styles.buttonRowStyles}}>
-          <button onMouseEnter={this.handleMouseEnter}
-                  onMouseLeave={this.handleMouseLeave}
+          <button
+                  className={'readable-edit-button'}
                   onClick={this.props.close}
                   style={styles.closeButtonStyle}>Close
           </button>
-          <button onMouseEnter={this.handleMouseEnter}
-                  onMouseLeave={this.handleMouseLeave}
+          <button
+                  className={'readable-submit-button'}
                   onClick={this.props.id ? this.editReadable : this.addReadable}
                   style={styles.submitButtonStyle}>Submit
           </button>

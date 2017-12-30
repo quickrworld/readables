@@ -32,16 +32,6 @@ class ToplineMenu extends Component {
     this.topvoted.style.color = 'rgba(0,0,0,0.8)'
     this.props.sortTopvoted()
   }
-  handleMouseEnter = (event) => {
-    event.target.style.backgroundColor = 'rgba(47,61,72,.8)'
-    event.target.style.color = 'rgba(255,255,255,.8)'
-    event.target.style.borderRadius = '4px'
-  }
-  handleMouseLeave = (event) => {
-    event.target.style.backgroundColor = 'rgb(255,255,255)'
-    event.target.style.color = 'rgb(0,0,0)'
-    event.target.style.borderRadius = '4px'
-  }
   render() {
     const sortLinkStyle = {
       'cursor': 'pointer',
@@ -61,8 +51,7 @@ class ToplineMenu extends Component {
           <hr/>
         </div>
         <div style={styles.buttonBoxStyle}>
-          <button onMouseEnter={this.handleMouseEnter}
-                  onMouseLeave={this.handleMouseLeave}
+          <button className={'new-readable-button'}
                   onClick={() => this.openEditor()}
                   style={styles.newReadableButtonStyle}>New Readable</button>
           <hr/>

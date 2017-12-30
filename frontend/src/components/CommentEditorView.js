@@ -14,16 +14,6 @@ class CommentEditorView extends Component {
       errorMessage: ''
     }
   }
-  handleMouseEnter = (event) => {
-    event.target.style.backgroundColor = 'rgba(47,61,72,.8)'
-    event.target.style.color = 'rgba(255,255,255,.8)'
-    event.target.style.borderRadius = '4px'
-  }
-  handleMouseLeave = (event) => {
-    event.target.style.backgroundColor = 'rgb(255,255,255)'
-    event.target.style.color = 'rgb(0,0,0)'
-    event.target.style.borderRadius = '4px'
-  }
   handleAuthorChange = (event) => {
     this.setState({author: event.target.value})
   }
@@ -100,15 +90,13 @@ class CommentEditorView extends Component {
         </div>
         <div style={{gridRow:'3', gridColumnStart:'4', ...styles.buttonRowStyle}}>
           <button
-            onMouseEnter={this.handleMouseEnter}
-            onMouseLeave={this.handleMouseLeave}
+            className={'editor-close-button'}
             onClick={this.props.close}
             style={{...styles.closeButtonStyle,
               display: !this.props.id ? 'none':'default'
             }}>Close</button>
           <button
-            onMouseEnter={this.handleMouseEnter}
-            onMouseLeave={this.handleMouseLeave}
+            className={'editor-comment-button'}
             onClick={this.props.id ? this.editComment : this.addComment}
             style={styles.commentButtonStyle}>Comment</button>
         </div>

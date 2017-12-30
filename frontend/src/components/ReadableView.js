@@ -18,16 +18,6 @@ class ReadableView extends Component {
   closeEditor = () => {
     this.setState({editorOpen: false})
   }
-  handleMouseEnter = (event) => {
-    event.target.style.backgroundColor = 'rgba(47,61,72,.8)'
-    event.target.style.color = 'rgba(255,255,255,.8)'
-    event.target.style.borderRadius = '4px'
-  }
-  handleMouseLeave = (event) => {
-    event.target.style.backgroundColor = 'rgb(255,255,255)'
-    event.target.style.color = 'rgb(0,0,0)'
-    event.target.style.borderRadius = '4px'
-  }
   render() {
     const id=this.props.id
     const author=this.props.readable.author
@@ -44,8 +34,8 @@ class ReadableView extends Component {
           <div style={styles.editIconStyle}>
             <span style={styles.editLabelStyle}>
               <button
-                onMouseEnter={this.handleMouseEnter}
-                onMouseLeave={this.handleMouseLeave}
+                className={'readable-edit-button'}
+
                 onClick={() => this.openEditor()} style={{borderWidth: '0px'}}>
                 Edit
               </button>

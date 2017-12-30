@@ -1,1 +1,64 @@
+.editor-close-button:hover {
+  background-color: rgba(47,61,72,.8);
+  color: rgba(255,255,255,.8);
+  border-radius: 4px;
+}
+
+.editor-comment-button:hover {
+  background-color: rgba(47,61,72,.8);
+  color: rgba(255,255,255,.8);
+  border-radius: 4px;
+}
+
+.readable-edit-button:hover {
+  background-color: rgba(47,61,72,.8);
+  color: rgba(255,255,255,.8);
+  border-radius: 4px;
+}
+
+.readable-submit-button:hover {
+  background-color: rgba(47,61,72,.8);
+  color: rgba(255,255,255,.8);
+  border-radius: 4px;
+}
+
+.readable-delete-button:hover {
+  background-color: rgba(255,0,0,.8);
+  color: rgba(255,255,255,.8);
+  border-radius: 4px;
+}
+
+.comment-edit-button:hover {
+  background-color: rgba(47,61,72,.8);
+  color: rgba(255,255,255,.8);
+  border-radius: 4px;
+}
+
+.comment-delete-button:hover {
+  background-color: rgba(255,0,0,.8);
+  color: rgba(255,255,255,.8);
+  border-radius: 4px;
+}
+
+.new-readable-button:hover {
+  background-color: rgba(47,61,72,.8);
+  color: rgba(255,255,255,.8);
+  border-radius: 4px;
+}
+
+.button-navlink:hover {
+  background-color: rgba(47,61,72,.4);
+  color: rgba(255,255,255,.8);
+  border-radius: 4px;
+}
+
+.category-navlink {
+  border-radius: 0px;
+}
+
+.category-navlink:hover {
+  border: 1px solid rgba(255,255,255,.5);
+  border-radius: 4px;
+}
+
 

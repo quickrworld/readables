@@ -12,12 +12,12 @@ const categoryViewStyles = {
   navLinkStyle: {
     color: 'rgba(255,255,255,.5)',
     textDecoration: 'none',
-    padding: '4px 8px 4px 8px'
+    padding: '4px 8px 4px 8px',
   },
   navLinkActiveStyle: {
     color: 'rgb(255,255,255)',
     textDecoration: 'none',
-    pointerEvents: 'none'
+    pointerEvents: 'none',
   }
 }
 
