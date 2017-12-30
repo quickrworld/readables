@@ -2,19 +2,16 @@ import React, { Component } from 'react'
 import FaThumbsODown from 'react-icons/lib/fa/thumbs-o-down'
 import {downvoteComment} from "../actions"
 import {connect} from "react-redux"
+import {voteButtonStyles as styles} from './styles/voteButtonStyles'
 
 class DownvoteCommentView extends Component {
   downvote = () => {
     this.props.downvoteComment(this.props.id)
   }
-  styles = {
-    pointerStyle: {
-      cursor: 'pointer'
-    }
-  }
+
   render() {
     return (
-      <span onClick={this.downvote} style={this.styles.pointerStyle}>
+      <span onClick={this.downvote} style={styles.pointerStyle}>
         <FaThumbsODown/>
       </span>
     )

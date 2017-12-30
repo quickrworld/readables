@@ -2,19 +2,15 @@ import React, { Component } from 'react'
 import FaThumbsOUp from 'react-icons/lib/fa/thumbs-o-up'
 import {upvoteComment} from "../actions"
 import {connect} from "react-redux"
+import {voteButtonStyles as styles} from './styles/voteButtonStyles'
 
 class UpvoteCommentView extends Component {
   upvote = () => {
     this.props.upvoteComment(this.props.id)
   }
-  styles = {
-    pointerStyle: {
-      'cursor': 'pointer'
-    }
-  }
   render() {
     return (
-      <span onClick={this.upvote} style={this.styles.pointerStyle}>
+      <span onClick={this.upvote} style={styles.pointerStyle}>
         <FaThumbsOUp/>
       </span>
     )
