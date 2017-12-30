@@ -121,6 +121,7 @@ class ReadableEditorView extends Component {
           <span style={styles.authorLabelStyle}>Authored by </span>
           <input
             type="text"
+            disabled={!!this.state.id}
             onChange={this.handleAuthorChange}
             name={'author'}
             placeholder={'Author'}
