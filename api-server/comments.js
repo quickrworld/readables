@@ -20,7 +20,7 @@ const defaultData = {
     timestamp: 1469479767190,
     body: 'React is a powerful JavaScript library ideal for building interactive, data-driven user interfaces, and it\'s used by some of the most successful brands in the world, including Facebook, Netflix, Airbnb, and more.',
     author: 'Dan Abramov',
-    voteScore: -5,
+    voteScore: 5,
     deleted: false,
     parentDeleted: false
   }
