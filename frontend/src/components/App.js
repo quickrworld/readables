@@ -21,9 +21,9 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <div id={'grid'} style={styles.gridStyle}>
-        <div id="sidebar" style={styles.sidebarStyle}>
-          <div id="logo" style={styles.logoBoxStyle}>
+        <div id='grid' style={styles.gridStyle}>
+        <div id='sidebar' style={styles.sidebarStyle}>
+          <div style={styles.logoBoxStyle}>
             <div style={styles.logoTextStyle}>
               Readable
             </div>
