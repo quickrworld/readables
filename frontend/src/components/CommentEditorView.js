@@ -84,6 +84,7 @@ class CommentEditorView extends Component {
           <span style={styles.commentLabelStyle}>Comment as </span>
           <input
             type="text"
+            disabled={!!this.state.id}
             onChange={this.handleAuthorChange}
             name={'author'}
             placeholder={'Author'}
