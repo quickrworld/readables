@@ -22,6 +22,8 @@ To get started right away, choose an installation directory, for example, `insta
     - `cd readables/frontend`
     - `npm install`
     - `npm start`
+    
+* You can browse the app at `http://localhost:3000`
 
 #### Note: `installdir` can be any directory where you want to install the frontend application and the API server
 #### Note: You must have write permissions in the working directory when you create `installdir`
