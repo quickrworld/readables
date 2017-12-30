@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import {connect} from 'react-redux'
 import {addComment} from '../actions'
 import {editComment} from '../actions'
+import {commentEditorViewStyles as styles} from './styles/commentEditorViewStyles'
 
 class CommentEditorView extends Component {
   constructor(props) {
@@ -76,61 +77,11 @@ class CommentEditorView extends Component {
       this.props.close()
     }
   }
-  styles = {
-    editorStyle: {
-      display: 'grid',
-      gridTemplateColumns: '1fr 1fr 1fr 1fr',
-      gridTemplateRows: 'auto minmax(min-content, min-content)',
-      paddingTop: '12px',
-      paddingBottom: '24px',
-    },
-    commentLabelStyle: {
-      paddingRight: '4px'
-    },
-    textareaStyle: {
-      paddingTop: '12px',
-      marginRight: '12px'
-    },
-    commentStyle: {
-      border: '1px solid lightgray',
-      overflowY: 'auto',
-      width: '100%',
-      outline: 'none',
-      boxShadow: 'none',
-      resize: 'none'
-    },
-    buttonRowStyle: {
-      justifySelf: 'end',
-      paddingRight: '6px'
-    },
-    closeButtonStyle: {
-      display: !this.props.id ? 'none':'default',
-      align:'right',
-      borderWidth: '0px'
-    },
-    commentButtonStyle: {
-      align:'right',
-      borderWidth: '0px'
-    },
-    errorMessageStyle: {
-      borderWidth: '0px',
-      padding: '0px, 6px, 0px, 6px',
-      color: 'red'
-    },
-    errorButtonStyle: {
-      fontSize: '12px',
-      alignContent: 'center',
-      border: '0px',
-      color: 'red',
-      paddingBottom:'0px',
-      paddingTop:'0px'
-    }
-  }
   render() {
     return (
-      <div style={this.styles.editorStyle}>
+      <div style={styles.editorStyle}>
         <div style={{gridRow: '1', gridColumnStart: '1', gridColumnEnd: '5'}}>
-          <span style={this.styles.commentLabelStyle}>Comment as </span>
+          <span style={styles.commentLabelStyle}>Comment as </span>
           <input
             type="text"
             onChange={this.handleAuthorChange}
@@ -139,31 +90,33 @@ class CommentEditorView extends Component {
             value={this.state.author ? this.state.author : ''}
           />
         </div>
-        <div style={{gridRow: '2', gridColumnStart: '1', gridColumnEnd: '5', ...this.styles.textareaStyle, }}>
+        <div style={{gridRow: '2', gridColumnStart: '1', gridColumnEnd: '5', ...styles.textareaStyle, }}>
           <textarea
             onChange={this.handleCommentChange} name={'story'} rows={'5'} placeholder={'Your story'}
             value={this.state.comment ? this.state.comment : ''}
-            style={this.styles.commentStyle}>
+            style={styles.commentStyle}>
           </textarea>
         </div>
-        <div style={{gridRow:'3', gridColumnStart:'4', ...this.styles.buttonRowStyle}}>
+        <div style={{gridRow:'3', gridColumnStart:'4', ...styles.buttonRowStyle}}>
           <button
             onMouseEnter={this.handleMouseEnter}
             onMouseLeave={this.handleMouseLeave}
             onClick={this.props.close}
-            style={this.styles.closeButtonStyle}>Close</button>
+            style={{...styles.closeButtonStyle,
+              display: !this.props.id ? 'none':'default'
+            }}>Close</button>
           <button
             onMouseEnter={this.handleMouseEnter}
             onMouseLeave={this.handleMouseLeave}
             onClick={this.props.id ? this.editComment : this.addComment}
-            style={this.styles.commentButtonStyle}>Comment</button>
+            style={styles.commentButtonStyle}>Comment</button>
         </div>
         {this.state.errorMessage &&
-        <div style={{gridRow: '3', gridColumnStart: '1', ...this.styles.errorMessageStyle}}>
+        <div style={{gridRow: '3', gridColumnStart: '1', ...styles.errorMessageStyle}}>
           {this.state.errorMessage}
           {this.state.errorMessage &&
           <button
-            style={this.styles.errorButtonStyle}
+            style={styles.errorButtonStyle}
             onClick={() => this.setState({errorMessage: ''})}>&#x24e7;</button>}
         </div>}
       </div>

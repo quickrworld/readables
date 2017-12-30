@@ -8,6 +8,7 @@ import UpvoteReadableView from './UpvoteReadableView'
 import DownvoteReadableView from './DownvoteReadableView'
 import CommentEditorView from './CommentEditorView'
 import ReadableEditorView from './ReadableEditorView'
+import {readableViewWithCommentsStyles as styles} from './styles/readableViewWithCommentsStyles'
 
 class ReadableViewWithComments extends Component {
   componentDidMount() {
@@ -44,80 +45,16 @@ class ReadableViewWithComments extends Component {
   deleteReadable = () => {
     this.props.deleteReadable(this.props.id)
   }
-  styles = {
-    topLineStyle: {
-      display: 'grid',
-      gridTemplateColumns: '1fr 1fr',
-      gridTemplateRows: 'auto minmax(min-content, min-content)',
-      paddingBottom: '6px',
-    },
-    titleStyle: {
-      gridColumnStart: '1',
-      gridColumnEnd: '2',
-      fontSize: '18px',
-      color: 'rgb(79, 79, 79)'
-    },
-    editIconStyle: {
-      fontSize: '12pt',
-      color: 'rgb(79, 79, 79)',
-      borderWidth: '0px'
-    },
-    voteStyle: {
-      whiteSpace: 'nowrap',
-      color: 'rgb(79, 79, 79)'
-    },
-    headlineStyle: {
-      gridColumnStart: '1',
-      gridColumnEnd: '3',
-      color: 'rgb(79, 79, 79)'
-    },
-    storyStyle: {
-      gridColumnStart: '1',
-      gridColumnEnd: '3',
-      padding: '12px 0px 12px 0px',
-      fontSize: '14px',
-      borderBottom: '1px solid lightgray',
-      color: 'rgb(79, 79, 79)'
-    },
-    editorBoxStyle: {
-      borderBottom: '1px solid lightgray',
-      marginBottom: '12px'
-    },
-    buttonStyle: {
-      borderWidth: '0px'
-    },
-    upvoteStyle: {
-      paddingLeft: '4px',
-      paddingRight:'4px'
-    },
-    navlinkStyle: {
-      textDecoration: 'none',
-      color: 'rgba(47,61,72,1)'
-    },
-    navlinkActiveStyle: {
-      textDecoration: 'none'
-    },
-    messageBoxStyle: {
-      border: '1px solid lightgray',
-      margin: '20px',
-      padding: '20px',
-      textAlign: 'center',
-      boxShadow: 'rgba(0,0,0,0.5) 0px 2px 4px 0px'
-    },
-    headingStyle: {
-      fontSize:'20px'
-    }
-  }
   render() {
     if (this.props.deleted === true) {
       return <div
-        style={this.styles.messageBoxStyle}>
-        <p style={this.styles.headingStyle}>{`Readable with id '${this.props.id}' has been deleted`}</p>
+        style={styles.messageBoxStyle}>
+        <p style={styles.headingStyle}>{`Readable with id '${this.props.id}' has been deleted`}</p>
         <p><span>You could </span>
           <span>
             <NavLink to={{pathname: '/'}}
-              style={this.styles.navlinkStyle}
-              activeStyle={this.styles.navlinkActiveStyle}
+              style={styles.navlinkStyle}
+              activeStyle={styles.navlinkActiveStyle}
               onMouseEnter={this.handleMouseEnter}
               onMouseLeave={this.handleMouseLeave}>browse other readables
             </NavLink>
@@ -126,8 +63,8 @@ class ReadableViewWithComments extends Component {
         <p><span>Or you could even </span>
           <span>
             <NavLink to={{pathname: '/'}}
-                     style={this.styles.navlinkStyle}
-                     activeStyle={this.styles.navlinkActiveStyle}
+                     style={styles.navlinkStyle}
+                     activeStyle={styles.navlinkActiveStyle}
                      onMouseEnter={this.handleMouseEnter}
                      onMouseLeave={this.handleMouseLeave}>write your own
             </NavLink>
@@ -137,13 +74,13 @@ class ReadableViewWithComments extends Component {
     }
     if (this.props.check === '404') {
       return <div
-        style={this.styles.messageBoxStyle}>
-        <p style={this.styles.headingStyle}>{`Readable with id '${this.props.id}' not found`}</p>
+        style={styles.messageBoxStyle}>
+        <p style={styles.headingStyle}>{`Readable with id '${this.props.id}' not found`}</p>
         <p><span>You could </span>
           <span>
             <NavLink to={{pathname: '/'}}
-              style={this.styles.navlinkStyle}
-              activeStyle={this.styles.navlinkActiveStyle}
+              style={styles.navlinkStyle}
+              activeStyle={styles.navlinkActiveStyle}
               onMouseEnter={this.handleMouseEnter}
               onMouseLeave={this.handleMouseLeave}>browse other readables
             </NavLink>
@@ -153,8 +90,8 @@ class ReadableViewWithComments extends Component {
         <p><span>Or you could even </span>
           <span>
             <NavLink to={{pathname: '/'}}
-               style={this.styles.navlinkStyle}
-               activeStyle={this.styles.navlinkActiveStyle}
+               style={styles.navlinkStyle}
+               activeStyle={styles.navlinkActiveStyle}
                onMouseEnter={this.handleMouseEnter}
                onMouseLeave={this.handleMouseLeave}>write your own
             </NavLink>
@@ -164,8 +101,8 @@ class ReadableViewWithComments extends Component {
     }
     return (
       <div>
-        <div style={this.styles.topLineStyle}>
-          <div style={this.styles.titleStyle}>
+        <div style={styles.topLineStyle}>
+          <div style={styles.titleStyle}>
             {this.props.title}
           </div>
           <div style={{
@@ -173,42 +110,42 @@ class ReadableViewWithComments extends Component {
             gridColumnEnd: '3',
             textAlign: 'right',
             alignContent: 'center'}}>
-            <span style={this.styles.editIconStyle}>
+            <span style={styles.editIconStyle}>
               <button
                 onMouseEnter={this.handleMouseEnterDelete}
                 onMouseLeave={this.handleMouseLeave}
                 onClick={() => this.deleteReadable()}
-                style={this.styles.buttonStyle}>
+                style={styles.buttonStyle}>
                 Delete
               </button>
               <button
                 onMouseEnter={this.handleMouseEnter}
                 onMouseLeave={this.handleMouseLeave}
                 onClick={() => this.openEditor()}
-                style={this.styles.buttonStyle}>
+                style={styles.buttonStyle}>
                 Edit
               </button>
             </span>
           </div>
-          <div style={this.styles.headlineStyle}>
+          <div style={styles.headlineStyle}>
             {this.props.author} |
             {new Date(this.props.timestamp).toDateString()}
             <span> | </span>
             <span style={{whiteSpace: 'nowrap'}}>{this.props.commentCount} Comments</span>
             <span> | </span>
-            <span style={this.styles.voteStyle}><span>{this.props.voteScore} votes </span>
-              <span aria-label="Up vote" style={this.styles.upvoteStyle}>
+            <span style={styles.voteStyle}><span>{this.props.voteScore} votes </span>
+              <span aria-label="Up vote" style={styles.upvoteStyle}>
                 <UpvoteReadableView readable={this.props.readable}/>
               </span> <span aria-label="Down vote">
                 <DownvoteReadableView readable={this.props.readable}/>
               </span>
             </span>
           </div>
-          <div className="story" style={this.styles.storyStyle}>
+          <div className="story" style={styles.storyStyle}>
             {this.props.body}
           </div>
           <div style={{display: this.state.editorOpen ? 'block' : 'none',
-            gridColumnStart:'1', gridColumnEnd: '5', ...this.styles.editorBoxStyle}}>
+            gridColumnStart:'1', gridColumnEnd: '5', ...styles.editorBoxStyle}}>
             <ReadableEditorView
               id={this.props.id}
               author={this.props.author}
@@ -231,13 +168,8 @@ class ReadableViewWithComments extends Component {
 function mapStateToProps(state, ownProps) {
   const id = ownProps.id
   const {readableById} = state
-  const readable =
-          readableById &&
-          readableById[id] &&
-          readableById[id].readable
-        ? readableById &&
-          readableById[id] &&
-          readableById[id].readable
+  const readable = readableById && readableById[id] && readableById[id].readable
+        ? readableById && readableById[id] && readableById[id].readable
         : {}
 
   const {title, author, category, body, voteScore, commentCount, timestamp, deleted } = readable

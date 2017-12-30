@@ -40,11 +40,11 @@ function mapStateToProps(state, ownProps) {
   const selectedReadable = ownProps.selectedReadable
 
   const { commentsByReadable } = state
+  const readable = commentsByReadable[selectedReadable]
 
-  const commentsArray =
-    commentsByReadable[selectedReadable] && commentsByReadable[selectedReadable].items
-    ? Object.keys(commentsByReadable[selectedReadable].items).reduce((comments, comment) => {
-        comments.push(commentsByReadable[selectedReadable].items[comment])
+  const commentsArray = readable && readable.items
+    ? Object.keys(readable.items).reduce((comments, comment) => {
+        comments.push(readable.items[comment])
         return comments
       }, [])
     : []
@@ -54,8 +54,8 @@ function mapStateToProps(state, ownProps) {
 
   const comments = selectedReadable
     ? {
-        isFetching: commentsByReadable[selectedReadable] ? commentsByReadable[selectedReadable].isFetching : false,
-        lastUpdated: commentsByReadable[selectedReadable] ? commentsByReadable[selectedReadable].lastUpdated : 0,
+        isFetching: readable ? readable.isFetching : false,
+        lastUpdated: readable ? readable.lastUpdated : 0,
         comments: sortedComments,
         order: commentsByReadable.order ? commentsByReadable.order : SORT_COMMENTS_NEWEST
       }

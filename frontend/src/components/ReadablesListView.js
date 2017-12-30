@@ -38,9 +38,11 @@ function mapStateToProps(state, ownProps) {
   const myCategory = ownProps.category
   const { readablesByCategory } = state
 
-  const readablesArray = (readablesByCategory[myCategory]
-    ? Object.keys(readablesByCategory[myCategory].items).reduce((readables, readable) => {
-      readables.push(readablesByCategory[myCategory].items[readable])
+  const categoryReadables = readablesByCategory[myCategory]
+
+  const readablesArray = (categoryReadables
+    ? Object.keys(categoryReadables.items).reduce((readables, readable) => {
+      readables.push(categoryReadables.items[readable])
       return readables
     }, [])
     : [])
@@ -48,10 +50,10 @@ function mapStateToProps(state, ownProps) {
   const sortedReadables = sortReadables(readablesArray, readablesByCategory.order)
 
   const readables = {
-    isFetching: readablesByCategory[myCategory] && readablesByCategory[myCategory].isFetching,
-    lastUpdated: readablesByCategory[myCategory] && readablesByCategory[myCategory].lastUpdated,
-    readables: sortedReadables, //orderedReadables,
-    order: readablesByCategory.order ? readablesByCategory.order : SORT_READABLES_NEWEST // remove this?
+    isFetching: categoryReadables && categoryReadables.isFetching,
+    lastUpdated: categoryReadables && categoryReadables.lastUpdated,
+    readables: sortedReadables,
+    order: readablesByCategory.order ? readablesByCategory.order : SORT_READABLES_NEWEST
   }
 
   return { readables, myCategory }

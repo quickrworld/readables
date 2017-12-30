@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux'
 import {sortCommentsNewest, sortCommentsOldest, sortCommentsTopvoted} from '../actions'
+import {commentToplineMenuStyles as styles} from './styles/commentToplineMenuStyles'
 
 class CommentToplineMenu extends Component {
   sortNewest = () => {
@@ -21,33 +22,20 @@ class CommentToplineMenu extends Component {
     this.topvoted.style.color = 'rgba(0,0,0,0.8)'
     this.props.sortTopvoted()
   }
-  styles = {
-    sortLineStyle: {
-      gridColumnStart: '1',
-      gridColumnEnd: '2',
-      cursor: 'pointer'
-    },
-    commentTopLineStyle: {
-      display: 'grid',
-      gridTemplateColumns: '1fr',
-      gridTemplateRows: 'auto minmax(min-content, min-content)',
-      paddingBottom: '6px'
-    }
-  }
   render() {
     return (
-      <div style={this.styles.commentTopLineStyle}>
-        <div style={this.styles.sortLineStyle}>
+      <div style={styles.commentTopLineStyle}>
+        <div style={styles.sortLineStyle}>
           <span ref={(span) => { this.newest = span }}
-                onClick={this.sortNewest} style={this.styles.sortLinkStyle}>
+                onClick={this.sortNewest} style={styles.sortLinkStyle}>
             Newest</span>
           <span> | </span>
           <span ref={(span) => { this.oldest = span }}
-                onClick={this.sortOldest} style={this.styles.sortLinkStyle}>
+                onClick={this.sortOldest} style={styles.sortLinkStyle}>
             Oldest</span>
           <span> | </span>
           <span ref={(span) => { this.topvoted = span }}
-                onClick={this.sortTopvoted} style={this.styles.sortLinkStyle}>
+                onClick={this.sortTopvoted} style={styles.sortLinkStyle}>
             Top voted</span>
           <hr/>
         </div>

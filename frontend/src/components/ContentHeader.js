@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import {connect} from "react-redux"
+import {commentHeaderStyles as styles} from './styles/commentHeaderStyles'
 
 class ContentHeader extends Component {
   state = {
@@ -18,50 +19,16 @@ class ContentHeader extends Component {
       errorMessage: nextProps.errorMessage
     }));
   }
-  styles = {
-    contentHeaderStyle: {
-      backgroundColor: 'rgb(28,38,47)',
-      boxShadow: 'rgba(0,0,0,0.5) 0px 2px 4px 0px',
-      zIndex: '10',
-      alignContent: 'baseline',
-      textAlign: 'center',
-      fontFamily: 'Open Sans',
-      fontSize: '18px',
-      color: 'rgb(255,255,255)',
-      padding: '17px 12px 12px 12px',
-      fontWeight: 200,
-      display: 'grid',
-      gridTemplateColumns: '1fr, 1fr, 1fr'
-    },
-    errorButtonStyle: {
-      fontSize: '14px',
-      padding: '4px 12px 12px 12px',
-      alignContent: 'center',
-      border: '0px',
-      backgroundColor: 'rgba(255,255,255,0)',
-      color: 'white'
-    },
-    errorMessageStyle: {
-      fontSize: '14px',
-      color: 'red',
-      gridColumnStart:'3',
-      gridColumnEnd:'4',
-      textAlign: 'right'
-    },
-    categoryLabelStyle: {
-      textAlign: 'center'
-    }
-  }
   render() {
     return (
-      <div id="content-header" style={this.styles.contentHeaderStyle}>
-        <div style={{gridColumnStart:'2', gridColumnEnd:'3', ...this.styles.categoryLabelStyle}}>
+      <div style={styles.contentHeaderStyle}>
+        <div style={{gridColumnStart:'2', gridColumnEnd:'3', ...styles.categoryLabelStyle}}>
           {this.props.category}
         </div>
-        <div style={this.styles.errorMessageStyle}>
+        <div style={styles.errorMessageStyle}>
           {this.state.errorMessage && `${this.state.errorMessage}`}
           {this.state.errorMessage &&
-          <button style={this.styles.errorButtonStyle}
+          <button style={styles.errorButtonStyle}
                   onClick={() => this.setState({errorMessage: '', counter: 0})}>&#x24e7;</button>}
         </div>
       </div>

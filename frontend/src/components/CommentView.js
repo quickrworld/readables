@@ -4,6 +4,8 @@ import DownvoteCommentView from './DownvoteCommentView'
 import CommentEditorView from './CommentEditorView'
 import {deleteComment} from "../actions";
 import {connect} from "react-redux";
+import { commentViewStyles as styles } from './styles/commentViewStyles'
+
 class CommentView extends Component {
   state = {
     editorOpen: false
@@ -32,71 +34,19 @@ class CommentView extends Component {
     event.target.style.color = 'rgb(0,0,0)'
     event.target.style.borderRadius = '4px'
   }
-  styles = {
-    topLineStyle: {
-      display: 'grid',
-      gridTemplateColumns: '1fr 1fr 1fr 1fr',
-      gridTemplateRows: 'auto minmax(min-content, min-content)',
-      paddingBottom: '6px',
-    },
-    commentHeadingStyle: {
-      gridColumnStart: '1',
-      gridColumnEnd: '4',
-      color: 'rgb(79, 79, 79)',
-      alignContent: 'center',
-      paddingTop: '12px'
-    },
-    commentVoteLineStyle: {
-      whiteSpace: 'nowrap',
-      color: 'rgb(79, 79, 79)'
-    },
-    buttonRowStyle: {
-      gridColumnStart: '4',
-      gridColumnEnd: '5',
-      textAlign: 'right',
-      alignContent: 'center',
-      paddingTop: '12px'
-    },
-    editIconStyle: {
-      fontSize: '12pt',
-      color: 'rgb(79, 79, 79)'
-    },
-    commentStoryStyle: {
-      gridColumnStart: '1',
-      gridColumnEnd: '3',
-      padding: '0px 0px 12px 0px',
-      fontSize: '14px',
-      borderBottom: '1px solid lightgray',
-      color: 'rgb(79, 79, 79)'
-    },
-    deleteButtonStyle: {
-      borderWidth: '0px'
-    },
-    editButtonStyle: {
-      borderWidth: '0px'
-    },
-    commentEditorBox: {
-      marginBottom: '12px',
-      borderBottom: '1px solid lightgray',
-    },
-    upvoteStyle: {
-      paddingLeft:'4px',
-      paddingRight:'4px'
-    }
-  }
   render() {
     return (
       <div>
-        <div style={this.styles.topLineStyle}>
-          <div style={this.styles.commentHeadingStyle}>
+        <div style={styles.topLineStyle}>
+          <div style={styles.commentHeadingStyle}>
             {this.props.comment && this.props.comment.author && this.props.comment.author}
             <span> | </span>
             {this.props.comment && this.props.comment && new Date(this.props.comment.timestamp).toDateString()}
             <span> | </span>
-            <span style={this.styles.commentVoteLineStyle}><span>
+            <span style={styles.commentVoteLineStyle}><span>
                 {this.props.comment &&
                 this.props.comment.voteScore} votes </span>
-              <span aria-label="Up vote" style={this.styles.upvoteStyle}>
+              <span aria-label="Up vote" style={styles.upvoteStyle}>
                 <UpvoteCommentView id={this.props.comment.id} parent={this.props.comment.parentId}/>
               </span>
               <span> </span>
@@ -105,29 +55,29 @@ class CommentView extends Component {
               </span>
             </span>
           </div>
-          <div style={this.styles.buttonRowStyle}>
+          <div style={styles.buttonRowStyle}>
             <button
               onMouseEnter={this.handleMouseEnterDelete}
               onMouseLeave={this.handleMouseLeave}
-              style={this.styles.deleteButtonStyle}
+              style={styles.deleteButtonStyle}
               onClick={() => this.deleteComment()}>
               Delete
             </button>
             <button
               onMouseEnter={this.handleMouseEnter}
               onMouseLeave={this.handleMouseLeave}
-              style={this.styles.editButtonStyle}
+              style={styles.editButtonStyle}
               onClick={() => this.openEditor()}>
               Edit
             </button>
           </div>
         </div>
-        <div className="story" style={this.styles.commentStoryStyle}>
+        <div className="story" style={styles.commentStoryStyle}>
           {this.props.comment &&
           this.props.comment.body &&
           this.props.comment.body}
         </div>
-        <div style={{display: this.state.editorOpen ? 'block' : 'none', ...this.styles.commentEditorBox}}>
+        <div style={{display: this.state.editorOpen ? 'block' : 'none', ...styles.commentEditorBox}}>
           <CommentEditorView
             id={this.props.comment.id}
             author={this.props.comment.author}

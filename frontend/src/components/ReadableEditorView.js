@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {addReadable} from '../actions'
 import {editReadable} from '../actions'
+import {readableEditorViewStyles as styles} from './styles/readableEditorViewStyles'
 
 class ReadableEditorView extends Component {
   componentWillReceiveProps(nextProps) {
@@ -113,80 +114,18 @@ class ReadableEditorView extends Component {
   handleStoryChange = (event) => {
     this.setState({story: event.target.value});
   }
-  styles = {
-    editorStyle: {
-      display: 'grid',
-      gridTemplateColumns: '1fr 1fr 1fr 1fr',
-      gridTemplateRows: 'auto minmax(min-content, min-content)',
-      paddingTop: '12px',
-      paddingBottom: '24px',
-      borderBottom: '1px solid lightgray'
-    },
-    authorLabelStyle: {
-      paddingRight: '4px'
-    },
-    categoryLabelStyle: {
-      paddingLeft: '12px',
-      paddingRight: '4px'
-    },
-    titleLabelStyle: {
-      paddingLeft: '12px',
-      paddingRight: '4px'
-    },
-    storyBoxStyle: {
-      gridRow: '3',
-      gridColumnStart: '1',
-      gridColumnEnd: '5',
-      paddingTop: '12px',
-      marginRight: '12px'
-    },
-    textareaStyle: {
-      border: '1px solid lightgray',
-      overflowY: 'auto',
-      width: '100%',
-      outline: 'none',
-      boxShadow: 'none',
-      resize: 'none'
-    },
-    buttonRowStyles: {
-      justifySelf: 'end', paddingRight: '6px'
-    },
-    errorMessageStyle: {
-      gridRow: '4',
-      gridColumnStart: '1',
-      gridColumnEnd: '3',
-      padding: '0px, 6px, 0px, 6px',
-      color: 'red'
-    },
-    errorButtonStyle: {
-      fontSize: '12px',
-      alignContent: 'center',
-      border: '0px',
-      color: 'red',
-      paddingBottom:'0px',
-      paddingTop:'0px'
-    },
-    closeButtonStyle: {
-      align: 'right',
-      borderWidth: '0px'
-    },
-    submitButtonStyle: {
-      align: 'right',
-      borderWidth: '0px'
-    }
-  }
   render() {
     return (
-      <div style={this.styles.editorStyle}>
+      <div style={styles.editorStyle}>
         <div style={{gridRow: '1', gridColumnStart: '1', gridColumnEnd: '5',}}>
-          <span style={this.styles.authorLabelStyle}>Authored by </span>
+          <span style={styles.authorLabelStyle}>Authored by </span>
           <input
             type="text"
             onChange={this.handleAuthorChange}
             name={'author'}
             placeholder={'Author'}
             value={this.state.author ? this.state.author : ''}/>
-          <span style={this.styles.categoryLabelStyle}>Category </span>
+          <span style={styles.categoryLabelStyle}>Category </span>
           <select name='categorySelector'
                   onChange={this.handleCategoryChange}
                   disabled={!!this.state.id}
@@ -197,7 +136,7 @@ class ReadableEditorView extends Component {
               return <option key={category.path} value={category.path}>{category.name}</option>
             })}
           </select>
-          <span style={this.styles.titleLabelStyle}>Title </span>
+          <span style={styles.titleLabelStyle}>Title </span>
           <input
             type="text"
             onChange={this.handleTitleChange}
@@ -206,30 +145,30 @@ class ReadableEditorView extends Component {
             value={this.state.title ? this.state.title : ''}
           />
         </div>
-        <div style={this.styles.storyBoxStyle}>
+        <div style={styles.storyBoxStyle}>
           <textarea
             onChange={this.handleStoryChange} name={'story'} rows={'5'} placeholder={'Your story'}
             value={this.state.story ? this.state.story : ''}
-            style={this.styles.textareaStyle}>
+            style={styles.textareaStyle}>
           </textarea>
         </div>
-        <div style={{gridRow: '4', gridColumnStart: '4', ...this.styles.buttonRowStyles}}>
+        <div style={{gridRow: '4', gridColumnStart: '4', ...styles.buttonRowStyles}}>
           <button onMouseEnter={this.handleMouseEnter}
                   onMouseLeave={this.handleMouseLeave}
                   onClick={this.props.close}
-                  style={this.styles.closeButtonStyle}>Close
+                  style={styles.closeButtonStyle}>Close
           </button>
           <button onMouseEnter={this.handleMouseEnter}
                   onMouseLeave={this.handleMouseLeave}
                   onClick={this.props.id ? this.editReadable : this.addReadable}
-                  style={this.styles.submitButtonStyle}>Submit
+                  style={styles.submitButtonStyle}>Submit
           </button>
         </div>
         {this.state.errorMessage &&
-        <div style={this.styles.errorMessageStyle}>
+        <div style={styles.errorMessageStyle}>
           {this.state.errorMessage}
           {this.state.errorMessage &&
-          <button style={this.styles.errorButtonStyle}
+          <button style={styles.errorButtonStyle}
                   onClick={() => this.setState({errorMessage: ''})}>&#x24e7;</button>}
         </div>}
       </div>

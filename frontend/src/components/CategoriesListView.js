@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import CategoryView from './CategoryView'
+import {categoryListViewStyles as styles} from './styles/categoriesListViewStyles'
 
 class CategoryListView extends Component {
   render() {
     return (
       <div>
-        <div style={{paddingTop:'12px'}}>
+        <div style={styles.categoryBoxStyle}>
           <CategoryView category={{
             'name': 'All Categories',
             'path':'all'}}/>

@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import {connect} from 'react-redux'
 import {sortReadablesNewest, sortReadablesOldest, sortReadablesTopvoted} from '../actions'
 import ReadableEditorView from './ReadableEditorView'
+import {toplineMenuStyles as styles} from './styles/toplineMenuStyles'
 
 class ToplineMenu extends Component {
   state = {
@@ -41,54 +42,29 @@ class ToplineMenu extends Component {
     event.target.style.color = 'rgb(0,0,0)'
     event.target.style.borderRadius = '4px'
   }
-  styles = {
-    topLineStyle: {
-      display: 'grid',
-      gridTemplateColumns: '1fr 1fr',
-      gridTemplateRows: 'auto minmax(min-content, min-content)',
-      paddingBottom: '6px',
-    },
-    sortLineStyle: {
-      gridColumnStart: '1',
-      gridColumnEnd: '2',
-    },
-    buttonBoxStyle: {
-      gridColumnStart: '2',
-      gridColumnEnd: '3',
-      textAlign: 'right'
-    },
-    newReadableButtonStyle: {
-      borderWidth: '0px',
-      borderColor: 'rgb(255,255,255)',
-      pointerStyle: 'pointer'
-    },
-    sortLinkStyle: {
-      'cursor': 'pointer',
-    }
-  }
   render() {
     const sortLinkStyle = {
       'cursor': 'pointer',
     }
     return (
-      <div style={this.styles.topLineStyle}>
-        <div style={this.styles.sortLineStyle}>
+      <div style={styles.topLineStyle}>
+        <div style={styles.sortLineStyle}>
           <span ref={(span) => { this.newest = span }}
                 onClick={this.sortNewest} style={sortLinkStyle}>
             Newest</span>
           <span> | </span>
-          <span ref={(span) => { this.oldest = span }} onClick={this.sortOldest} style={this.styles.sortLinkStyle}>
+          <span ref={(span) => { this.oldest = span }} onClick={this.sortOldest} style={styles.sortLinkStyle}>
             Oldest</span>
           <span> | </span>
-          <span ref={(span) => { this.topvoted = span }} onClick={this.sortTopvoted} style={this.styles.sortLinkStyle}>
+          <span ref={(span) => { this.topvoted = span }} onClick={this.sortTopvoted} style={styles.sortLinkStyle}>
             Top voted</span>
           <hr/>
         </div>
-        <div style={this.styles.buttonBoxStyle}>
+        <div style={styles.buttonBoxStyle}>
           <button onMouseEnter={this.handleMouseEnter}
                   onMouseLeave={this.handleMouseLeave}
                   onClick={() => this.openEditor()}
-                  style={this.styles.newReadableButtonStyle}>New Readable</button>
+                  style={styles.newReadableButtonStyle}>New Readable</button>
           <hr/>
         </div>
         <div style={{display: this.state.editorOpen ? 'block' : 'none', gridColumnStart:'1', gridColumnEnd: '5'}}>
