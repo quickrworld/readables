@@ -12,7 +12,6 @@ class CommentToplineMenu extends Component {
     this.highlightNewest()
   }
   componentWillReceiveProps(nextProps) {
-    console.log('nextProps.order', nextProps.order)
     const sort = nextProps.order ? nextProps.order : SORT_COMMENTS_NEWEST
     this.setState({sort: sort})
     switch(sort) {

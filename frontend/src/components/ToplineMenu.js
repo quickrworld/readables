@@ -15,7 +15,6 @@ class ToplineMenu extends Component {
     this.highlightOldest()
   }
   componentWillReceiveProps(nextProps) {
-    console.log('nextProps.order', nextProps.order)
     const sort = nextProps.order ? nextProps.order : SORT_READABLES_OLDEST
     this.setState({sort: sort})
     switch(sort) {
