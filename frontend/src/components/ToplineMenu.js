@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux'
-import {sortReadablesNewest, sortReadablesOldest, sortReadablesTopvoted} from '../actions'
+import {
+  SORT_READABLES_NEWEST, SORT_READABLES_OLDEST, SORT_READABLES_TOPVOTED, sortReadablesNewest, sortReadablesOldest,
+  sortReadablesTopvoted
+} from '../actions'
 import ReadableEditorView from './ReadableEditorView'
 import {toplineMenuStyles as styles} from './styles/toplineMenuStyles'
 
@@ -8,41 +11,72 @@ class ToplineMenu extends Component {
   state = {
     editorOpen: false
   }
+  componentDidMount() {
+    this.highlightOldest()
+  }
+  componentWillReceiveProps(nextProps) {
+    console.log('nextProps.order', nextProps.order)
+    const sort = nextProps.order ? nextProps.order : SORT_READABLES_OLDEST
+    this.setState({sort: sort})
+    switch(sort) {
+      case SORT_READABLES_NEWEST:
+        this.highlightNewest()
+        break
+      case SORT_READABLES_OLDEST:
+        this.highlightOldest()
+        break
+      case SORT_READABLES_TOPVOTED:
+        this.highlightTopvoted()
+        break
+      default:
+        this.highlightOldest()
+        break
+    }
+  }
   openEditor = () => {
     this.setState({editorOpen: true})
   }
   closeEditor = () => {
     this.setState({editorOpen: false})
   }
-  sortNewest = () => {
+  highlightNewest() {
     this.newest.style.color = 'rgba(0,0,0,.9)'
     this.newest.style.fontWeight = 'bold'
     this.oldest.style.color = 'rgba(128,128,128,.9)'
     this.oldest.style.fontWeight = 'normal'
     this.topvoted.style.color = 'rgba(128,128,128,.9)'
     this.topvoted.style.fontWeight = 'normal'
-    this.props.sortNewest()
-    this.setState({sort: 'newest'})
   }
-  sortOldest = () => {
+  highlightOldest() {
     this.newest.style.color = 'rgba(128,128,128,.9)'
-    this.newest.style.fontWeight = 'nornal'
+    this.newest.style.fontWeight = 'normal'
     this.oldest.style.color = 'rgba(0,0,0,0.9)'
     this.oldest.style.fontWeight = 'bold'
     this.topvoted.style.color = 'rgba(128,128,128,.9)'
     this.topvoted.style.fontWeight = 'normal'
-    this.props.sortOldest()
-    this.setState({sort: 'oldest'})
   }
-  sortTopvoted = () => {
+  highlightTopvoted() {
     this.newest.style.color = 'rgba(128,128,128,.9)'
-    this.newest.style.fontWeight = 'nornal'
+    this.newest.style.fontWeight = 'normal'
     this.oldest.style.color = 'rgba(128,128,128,.9)'
     this.oldest.style.fontWeight = 'normal'
     this.topvoted.style.color = 'rgba(0,0,0,0.9)'
     this.topvoted.style.fontWeight = 'bold'
+  }
+  sortNewest = () => {
+    this.highlightNewest()
+    this.props.sortNewest()
+    this.setState({sort: SORT_READABLES_NEWEST})
+  }
+  sortOldest = () => {
+    this.highlightOldest()
+    this.props.sortOldest()
+    this.setState({sort: SORT_READABLES_OLDEST})
+  }
+  sortTopvoted = () => {
+    this.highlightTopvoted()
     this.props.sortTopvoted()
-    this.setState({sort: 'topvoted'})
+    this.setState({sort: SORT_READABLES_TOPVOTED})
   }
   render() {
     return (
@@ -52,21 +86,21 @@ class ToplineMenu extends Component {
                 onClick={this.sortNewest}
                 style={{
                   cursor: 'pointer',
-                  fontWeight: this.state.sort === 'newest' ? 'bold' : 'normal'}}>
+                  fontWeight: this.state.sort === SORT_READABLES_NEWEST ? 'bold' : 'normal'}}>
             Newest</span>
           <span> | </span>
           <span ref={(span) => { this.oldest = span }}
                 onClick={this.sortOldest}
                 style={{
                   cursor: 'pointer',
-                  fontWeight: this.state.sort === 'oldest' ? 'bold' : 'normal'}}>
+                  fontWeight: this.state.sort === SORT_READABLES_OLDEST ? 'bold' : 'normal'}}>
             Oldest</span>
           <span> | </span>
           <span ref={(span) => { this.topvoted = span }}
                 onClick={this.sortTopvoted}
                 style={{
                   cursor: 'pointer',
-                  fontWeight: this.state.sort === 'topvoted' ? 'bold' : 'normal'}}>
+                  fontWeight: this.state.sort === SORT_READABLES_TOPVOTED ? 'bold' : 'normal'}}>
             Top voted</span>
           <hr/>
         </div>
@@ -88,8 +122,9 @@ class ToplineMenu extends Component {
 }
 
 function mapStateToProps(state) {
-  const {selectedCategory} = state
-  return { category: selectedCategory }
+  const {selectedCategory } = state
+  const {order} = state.readablesByCategory
+  return { category: selectedCategory, order: order }
 }
 
 function mapDispatchToProps(dispatch) {
