@@ -38,7 +38,7 @@ class CommentEditorView extends Component {
       comment: this.state.comment
     })
     this.props.fetchReadable(this.props.readable)
-    this.setState({author: '', comment: ''})
+    this.setState({comment: ''})
     // TODO
     if (this.props.close) {
       this.props.close()
