@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import FaThumbsODown from 'react-icons/lib/fa/thumbs-o-down'
 import {downvoteReadable} from "../actions"
 import {connect} from "react-redux"
-import {voteButtonStyles as styles} from './styles/voteButtonStyles'
 
 class DownvoteReadableView extends Component {
   state = {
