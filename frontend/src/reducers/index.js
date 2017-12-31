@@ -236,6 +236,10 @@ function readableById(state = {
       return deletedReadableState
     case FETCH_READABLE_DELETE_FAILURE:
       return state
+    case FETCH_COMMENT_DELETE_SUCCESS:
+      let deletedCommentState = Object.assign({}, state)
+      deletedCommentState[action.comment.parentId].readable.commentCount -= 1
+      return deletedCommentState
     default:
       return state
   }

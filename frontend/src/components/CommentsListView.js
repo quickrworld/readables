@@ -28,7 +28,7 @@ class CommentsListView extends Component {
         <CommentToplineMenu/>
         <div>
           {comments.map((comment) => (
-            <CommentView key={comment.id} comment={comment}/>
+            <CommentView key={comment.id} comment={comment} fetchReadable={this.props.fetchReadable}/>
           ))}
         </div>
       </div>

@@ -18,6 +18,8 @@ class CommentView extends Component {
   }
   deleteComment = () => {
     this.props.deleteComment(this.props.comment)
+    // works erratically - It must be fired only after deleteComment is finished.
+    // this.props.fetchReadable(this.props.comment.parentId)
   }
   render() {
     return (
@@ -43,14 +45,12 @@ class CommentView extends Component {
           <div style={styles.buttonRowStyle}>
             <button
               className={'comment-delete-button'}
-
               style={styles.deleteButtonStyle}
               onClick={() => this.deleteComment()}>
               Delete
             </button>
             <button
               className={'comment-edit-button'}
-
               style={styles.editButtonStyle}
               onClick={() => this.openEditor()}>
               Edit
