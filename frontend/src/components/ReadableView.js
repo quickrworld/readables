@@ -34,7 +34,7 @@ class ReadableView extends Component {
             <NavLink
               style={styles.navlinkStyle}
               activeStyle={styles.navlinkActiveStyle}
-              to={{pathname: `/posts/${this.props.id}`}}>
+              to={{pathname: `/${this.props.readable.category}/${this.props.id}`}}>
               {this.props.readable.title} {(this.props.category === 'all') && <span>&#183; </span>}
               {(this.props.category === 'all') && this.props.readableCategoryName}
             </NavLink>
@@ -74,7 +74,7 @@ class ReadableView extends Component {
             <NavLink
               style={styles.navlinkStyle}
               activeStyle={styles.navlinkActiveStyle}
-              to={{pathname: `/posts/${this.props.id}`}}>
+              to={{pathname: `/${this.props.readable.category}/${this.props.id}`}}>
               {this.props.readable.body}
             </NavLink>
           </div>

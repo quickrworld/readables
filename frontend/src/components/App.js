@@ -48,14 +48,14 @@ class App extends Component {
                     <ReadablesListView category={'all'}/>
                   </div>
                 )}/>
-                <Route exact={true} path={'/:category/posts'} render={({match}) => (
+                <Route exact={true} path={'/:category'} render={({match}) => (
                   <div>
                     <ToplineMenu/>
                     <ReadablesListView category={match.params.category}/>
                   </div>
                 )}/>
-                <Route exact={true} path={'/posts/:id'} render={({match}) => (
-                  <ReadableViewWithComments id={match.params.id}/>
+                <Route exact={true} path={'/:category/:id'} render={({match}) => (
+                  <ReadableViewWithComments id={match.params.id} category={match.params.category}/>
                 )}/>
               </div>
             </div>

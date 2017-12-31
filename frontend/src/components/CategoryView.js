@@ -10,7 +10,7 @@ class CategoryView extends Component {
           style={styles.navLinkStyle}
           activeStyle={styles.navLinkActiveStyle}
           to={{
-            pathname: `/${this.props.category.path}/posts`,
+            pathname: `/${this.props.category.path}`,
           }}>{this.props.category.name}
         </NavLink>
       </div>
