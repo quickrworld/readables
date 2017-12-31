@@ -227,10 +227,12 @@ function readableById(state = {
       return readableEditedState
     case FETCH_READABLE_DELETE_SUCCESS:
       let deletedReadableState = Object.assign({}, state)
-      delete deletedReadableState[action.readable.id].readable
-      deletedReadableState[action.readable.id].readable =
-        {id: action.readable.id, deleted: true, body: 'deleted!', category: action.readable.category}
-      return deletedReadableState
+      if (deletedReadableState[action.readable.id]) {
+        delete deletedReadableState[action.readable.id].readable
+        deletedReadableState[action.readable.id].readable =
+          {id: action.readable.id, deleted: true, body: 'deleted!', category: action.readable.category}
+      }
+      return {} // deletedReadableState
     case FETCH_READABLE_DELETE_FAILURE:
       return state
     default:
@@ -303,6 +305,17 @@ function readablesByCategory(state = {
         readableEditedState['all'].items[action.readable.id] = action.readable
       }
       return readableEditedState
+    case FETCH_READABLE_DELETE_SUCCESS:
+      let readableDeletedState = Object.assign({}, state)
+      if(readableDeletedState[action.readable.category] &&
+        readableDeletedState[action.readable.category].items) {
+        delete readableDeletedState[action.readable.category].items[action.readable.id]
+      }
+      if(readableDeletedState['all'] &&
+        readableDeletedState['all'].items) {
+        delete readableDeletedState['all'].items[action.readable.id]
+      }
+      return readableDeletedState
     case SELECT_CATEGORY:
       const value = {
         ...state,

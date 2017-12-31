@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {selectReadable, fetchReadable} from '../actions'
+import {selectReadable, fetchReadable, deleteReadable} from '../actions'
 import {withRouter} from 'react-router-dom'
 import {connect} from 'react-redux'
 import UpvoteReadableView from './UpvoteReadableView'
@@ -17,6 +17,9 @@ class ReadableView extends Component {
   }
   closeEditor = () => {
     this.setState({editorOpen: false})
+  }
+  deleteReadable = () => {
+    this.props.deleteReadable(this.props.id)
   }
   render() {
     const id=this.props.id
@@ -37,13 +40,18 @@ class ReadableView extends Component {
             </NavLink>
           </div>
           <div style={styles.editIconStyle}>
-            <span style={styles.editLabelStyle}>
+              <button
+                className={'readable-delete-button'}
+                onClick={() => this.deleteReadable()}
+                style={{...styles.buttonStyle, borderWidth:'0px'}}>
+                Delete
+              </button>
               <button
                 className={'readable-edit-button'}
-                onClick={() => this.openEditor()} style={{borderWidth: '0px'}}>
+                onClick={() => this.openEditor()}
+                style={{borderWidth: '0px'}}>
                 Edit
               </button>
-            </span>
           </div>
           <div style={styles.headlineStyle}>
             {this.props.readable.author}
@@ -99,7 +107,8 @@ function mapStateToProps(state, ownProps) {
 function mapDispatchToProps(dispatch) {
   return {
     selectReadable: (id) => dispatch(selectReadable(id)),
-    fetchReadable: (id) => dispatch(fetchReadable(id))
+    fetchReadable: (id) => dispatch(fetchReadable(id)),
+    deleteReadable: (id) => dispatch(deleteReadable(id)),
   }
 }
 
