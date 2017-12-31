@@ -31,6 +31,19 @@ const contentHeaderStyles = {
   categoryLabelStyle: {
     textAlign: 'center',
     color: 'rgba(255,255,255,.8)'
+  },
+  hamburgerStyles: {
+    cursor: 'pointer',
+    textAlign: 'center',
+    alignContent: 'top',
+    outlineStyle: 'none',
+    fontSize: '22px',
+    borderWidth: '0px',
+    padding: '0px',
+    marginTop: '-6px',
+    gridColumnStart: '1',
+    color: 'rgb(2, 179, 228)',
+    backgroundColor:'rgba(255,255,255,0)'
   }
 }
 
