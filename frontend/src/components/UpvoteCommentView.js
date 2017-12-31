@@ -5,13 +5,19 @@ import {connect} from "react-redux"
 import {voteButtonStyles as styles} from './styles/voteButtonStyles'
 
 class UpvoteCommentView extends Component {
+  state = {
+    canVote: true
+  }
   upvote = () => {
-    this.props.upvoteComment(this.props.id)
+    if (this.state.canVote) {
+      this.props.upvoteComment(this.props.id)
+      this.setState({canVote: false})
+    }
   }
   render() {
     return (
-      <span onClick={this.upvote} style={styles.pointerStyle}>
-        <FaThumbsOUp/>
+      <span onClick={this.upvote} style={{cursor: 'pointer'}}>
+        <FaThumbsOUp style={{color: this.state.canVote ? 'rgb(79,79,79)' : 'lightgray'}}/>
       </span>
     )
   }

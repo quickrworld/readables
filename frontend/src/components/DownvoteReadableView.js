@@ -5,13 +5,19 @@ import {connect} from "react-redux"
 import {voteButtonStyles as styles} from './styles/voteButtonStyles'
 
 class DownvoteReadableView extends Component {
+  state = {
+    canVote: true
+  }
   downvote = () => {
-    this.props.downvoteReadable(this.props.readable.id)
+    if (this.state.canVote) {
+      this.props.downvoteReadable(this.props.readable.id)
+      this.setState({ canVote: false })
+    }
   }
   render() {
     return (
-      <span onClick={this.downvote} style={styles.pointerStyle}>
-        <FaThumbsODown/>
+      <span onClick={this.downvote} style={{cursor: 'pointer'}}>
+        <FaThumbsODown style={{color: this.state.canVote ? 'rgb(79,79,79)' : 'lightgray'}}/>
       </span>
     )
   }
