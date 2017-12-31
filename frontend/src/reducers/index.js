@@ -231,8 +231,9 @@ function readableById(state = {
         delete deletedReadableState[action.readable.id].readable
         deletedReadableState[action.readable.id].readable =
           {id: action.readable.id, deleted: true, body: 'deleted!', category: action.readable.category}
+        return deletedReadableState
       }
-      return {} // deletedReadableState
+      return deletedReadableState
     case FETCH_READABLE_DELETE_FAILURE:
       return state
     default:
