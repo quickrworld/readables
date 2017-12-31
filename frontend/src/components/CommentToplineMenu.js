@@ -1,34 +1,69 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux'
-import {sortCommentsNewest, sortCommentsOldest, sortCommentsTopvoted} from '../actions'
+import {
+  SORT_COMMENTS_NEWEST, SORT_COMMENTS_OLDEST, SORT_COMMENTS_TOPVOTED,
+  sortCommentsNewest, sortCommentsOldest, sortCommentsTopvoted
+} from '../actions'
 import {commentToplineMenuStyles as styles} from './styles/commentToplineMenuStyles'
 
 class CommentToplineMenu extends Component {
-  sortNewest = () => {
+  state = {}
+  componentDidMount() {
+    this.highlightNewest()
+  }
+  componentWillReceiveProps(nextProps) {
+    console.log('nextProps.order', nextProps.order)
+    const sort = nextProps.order ? nextProps.order : SORT_COMMENTS_NEWEST
+    this.setState({sort: sort})
+    switch(sort) {
+      case SORT_COMMENTS_NEWEST:
+        this.highlightNewest()
+        break
+      case SORT_COMMENTS_OLDEST:
+        this.highlightOldest()
+        break
+      case SORT_COMMENTS_TOPVOTED:
+        this.highlightTopvoted()
+        break
+      default:
+        this.highlightOldest()
+        break
+    }
+  }
+  highlightNewest() {
     this.newest.style.color = 'rgba(0,0,0,.9)'
     this.newest.style.fontWeight = 'bold'
     this.oldest.style.color = 'rgba(128,128,128,.9)'
     this.oldest.style.fontWeight = 'normal'
     this.topvoted.style.color = 'rgba(128,128,128,.9)'
     this.topvoted.style.fontWeight = 'normal'
-    this.props.sortNewest()
   }
-  sortOldest = () => {
+  highlightOldest() {
     this.newest.style.color = 'rgba(128,128,128,.9)'
     this.newest.style.fontWeight = 'nornal'
     this.oldest.style.color = 'rgba(0,0,0,0.9)'
     this.oldest.style.fontWeight = 'bold'
     this.topvoted.style.color = 'rgba(128,128,128,.9)'
     this.topvoted.style.fontWeight = 'normal'
-    this.props.sortOldest()
   }
-  sortTopvoted = () => {
+  highlightTopvoted() {
     this.newest.style.color = 'rgba(128,128,128,.9)'
     this.newest.style.fontWeight = 'nornal'
     this.oldest.style.color = 'rgba(128,128,128,.9)'
     this.oldest.style.fontWeight = 'normal'
     this.topvoted.style.color = 'rgba(0,0,0,0.9)'
     this.topvoted.style.fontWeight = 'bold'
+  }
+  sortNewest = () => {
+    this.highlightNewest()
+    this.props.sortNewest()
+  }
+  sortOldest = () => {
+    this.highlightOldest()
+    this.props.sortOldest()
+  }
+  sortTopvoted = () => {
+    this.highlightTopvoted()
     this.props.sortTopvoted()
   }
   render() {
@@ -56,6 +91,11 @@ class CommentToplineMenu extends Component {
   }
 }
 
+function mapStateToProps(state) {
+  const order = state.commentsByReadable.order
+  return { order: order }
+}
+
 function mapDispatchToProps(dispatch) {
   return {
     sortNewest: () => dispatch(sortCommentsNewest()),
@@ -64,4 +104,4 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-export default connect(null, mapDispatchToProps)(CommentToplineMenu)
+export default connect(mapStateToProps, mapDispatchToProps)(CommentToplineMenu)
