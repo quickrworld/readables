@@ -28,8 +28,13 @@ class ReadableView extends Component {
       <div>
         <div style={styles.topLineStyle}>
           <div style={styles.titleStyle}>
-            {this.props.readable.title} {(this.props.category === 'all') && <span>&#183; </span>}
-            {(this.props.category === 'all') && this.props.readableCategoryName}
+            <NavLink
+              style={styles.navlinkStyle}
+              activeStyle={styles.navlinkActiveStyle}
+              to={{pathname: `/posts/${this.props.id}`}}>
+              {this.props.readable.title} {(this.props.category === 'all') && <span>&#183; </span>}
+              {(this.props.category === 'all') && this.props.readableCategoryName}
+            </NavLink>
           </div>
           <div style={styles.editIconStyle}>
             <span style={styles.editLabelStyle}>
@@ -61,9 +66,7 @@ class ReadableView extends Component {
             <NavLink
               style={styles.navlinkStyle}
               activeStyle={styles.navlinkActiveStyle}
-              to={{
-                pathname: `/posts/${this.props.id}`,
-              }}>
+              to={{pathname: `/posts/${this.props.id}`}}>
               {this.props.readable.body}
             </NavLink>
           </div>

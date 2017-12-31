@@ -33,20 +33,22 @@ class ToplineMenu extends Component {
     this.props.sortTopvoted()
   }
   render() {
-    const sortLinkStyle = {
-      'cursor': 'pointer',
-    }
     return (
       <div style={styles.topLineStyle}>
         <div style={styles.sortLineStyle}>
           <span ref={(span) => { this.newest = span }}
-                onClick={this.sortNewest} style={sortLinkStyle}>
+                onClick={this.sortNewest}
+                style={{cursor: 'pointer', color: 'rgba(128,128,128,.8)'}}>
             Newest</span>
           <span> | </span>
-          <span ref={(span) => { this.oldest = span }} onClick={this.sortOldest} style={styles.sortLinkStyle}>
+          <span ref={(span) => { this.oldest = span }}
+                onClick={this.sortOldest}
+                style={{cursor: 'pointer', color: 'rgba(0,0,0,.8)'}}>
             Oldest</span>
           <span> | </span>
-          <span ref={(span) => { this.topvoted = span }} onClick={this.sortTopvoted} style={styles.sortLinkStyle}>
+          <span ref={(span) => { this.topvoted = span }}
+                onClick={this.sortTopvoted}
+                style={{cursor: 'pointer', color: 'rgba(128,128,128,.8)'}}>
             Top voted</span>
           <hr/>
         </div>
