@@ -22,6 +22,7 @@ class ToplineMenu extends Component {
     this.topvoted.style.color = 'rgba(128,128,128,.9)'
     this.topvoted.style.fontWeight = 'normal'
     this.props.sortNewest()
+    this.setState({sort: 'newest'})
   }
   sortOldest = () => {
     this.newest.style.color = 'rgba(128,128,128,.9)'
@@ -31,6 +32,7 @@ class ToplineMenu extends Component {
     this.topvoted.style.color = 'rgba(128,128,128,.9)'
     this.topvoted.style.fontWeight = 'normal'
     this.props.sortOldest()
+    this.setState({sort: 'oldest'})
   }
   sortTopvoted = () => {
     this.newest.style.color = 'rgba(128,128,128,.9)'
@@ -40,6 +42,7 @@ class ToplineMenu extends Component {
     this.topvoted.style.color = 'rgba(0,0,0,0.9)'
     this.topvoted.style.fontWeight = 'bold'
     this.props.sortTopvoted()
+    this.setState({sort: 'topvoted'})
   }
   render() {
     return (
@@ -47,17 +50,23 @@ class ToplineMenu extends Component {
         <div style={styles.sortLineStyle}>
           <span ref={(span) => { this.newest = span }}
                 onClick={this.sortNewest}
-                style={{cursor: 'pointer'}}>
+                style={{
+                  cursor: 'pointer',
+                  fontWeight: this.state.sort === 'newest' ? 'bold' : 'normal'}}>
             Newest</span>
           <span> | </span>
           <span ref={(span) => { this.oldest = span }}
                 onClick={this.sortOldest}
-                style={{cursor: 'pointer'}}>
+                style={{
+                  cursor: 'pointer',
+                  fontWeight: this.state.sort === 'oldest' ? 'bold' : 'normal'}}>
             Oldest</span>
           <span> | </span>
           <span ref={(span) => { this.topvoted = span }}
                 onClick={this.sortTopvoted}
-                style={{cursor: 'pointer'}}>
+                style={{
+                  cursor: 'pointer',
+                  fontWeight: this.state.sort === 'topvoted' ? 'bold' : 'normal'}}>
             Top voted</span>
           <hr/>
         </div>
