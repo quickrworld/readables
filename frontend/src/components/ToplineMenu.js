@@ -47,17 +47,17 @@ class ToplineMenu extends Component {
         <div style={styles.sortLineStyle}>
           <span ref={(span) => { this.newest = span }}
                 onClick={this.sortNewest}
-                style={{cursor: 'pointer', color: 'rgba(128,128,128,.9)', fontWeight: 'normal'}}>
+                style={{cursor: 'pointer'}}>
             Newest</span>
           <span> | </span>
           <span ref={(span) => { this.oldest = span }}
                 onClick={this.sortOldest}
-                style={{cursor: 'pointer', color: 'rgba(0,0,0,.9)', fontWeight: 'bold'}}>
+                style={{cursor: 'pointer'}}>
             Oldest</span>
           <span> | </span>
           <span ref={(span) => { this.topvoted = span }}
                 onClick={this.sortTopvoted}
-                style={{cursor: 'pointer', color: 'rgba(128,128,128,.9)', fontWeight: 'normal'}}>
+                style={{cursor: 'pointer'}}>
             Top voted</span>
           <hr/>
         </div>
