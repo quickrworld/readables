@@ -40,7 +40,7 @@ class CommentToplineMenu extends Component {
   }
   highlightOldest() {
     this.newest.style.color = 'rgba(128,128,128,.9)'
-    this.newest.style.fontWeight = 'nornal'
+    this.newest.style.fontWeight = 'normal'
     this.oldest.style.color = 'rgba(0,0,0,0.9)'
     this.oldest.style.fontWeight = 'bold'
     this.topvoted.style.color = 'rgba(128,128,128,.9)'
@@ -48,7 +48,7 @@ class CommentToplineMenu extends Component {
   }
   highlightTopvoted() {
     this.newest.style.color = 'rgba(128,128,128,.9)'
-    this.newest.style.fontWeight = 'nornal'
+    this.newest.style.fontWeight = 'normal'
     this.oldest.style.color = 'rgba(128,128,128,.9)'
     this.oldest.style.fontWeight = 'normal'
     this.topvoted.style.color = 'rgba(0,0,0,0.9)'
