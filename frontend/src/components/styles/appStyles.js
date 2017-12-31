@@ -54,8 +54,8 @@ const appStyles = {
     borderBottom: '1px solid rgb(28,38,47)',
   },
   logoTextStyle: {
-    fontSize: '21px',
-    color: 'rgb(255,255,255)',
+    fontSize: '20px',
+    color: 'rgba(255,255,255,.9)',
     padding: '10px 12px 5px 24px',
     fontWeight: 200,
   }

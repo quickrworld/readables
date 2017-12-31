@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import {connect} from "react-redux"
-import {commentHeaderStyles as styles} from './styles/commentHeaderStyles'
+import {contentHeaderStyles as styles} from './styles/contentHeaderStyles'
 class ContentHeader extends Component {
   state = {
     counter: 0,
@@ -37,7 +37,7 @@ class ContentHeader extends Component {
   toggleSidebar() {
     let sidebar = document.getElementById('sidebar')
     let grid = document.getElementById('grid')
-    if(sidebar.style.display === 'grid' || sidebar.style.display === '') { // needs a flag...
+    if(sidebar.style.display === 'grid' || sidebar.style.display === '') {
       sidebar.style.display = 'none'
       grid.style.gridTemplateColumns = "1fr"
     } else {

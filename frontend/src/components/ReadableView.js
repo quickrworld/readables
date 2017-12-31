@@ -35,7 +35,6 @@ class ReadableView extends Component {
             <span style={styles.editLabelStyle}>
               <button
                 className={'readable-edit-button'}
-
                 onClick={() => this.openEditor()} style={{borderWidth: '0px'}}>
                 Edit
               </button>

@@ -40,9 +40,10 @@ const readableViewStyles = {
   },
   navlinkStyle: {
     textDecoration: 'none',
-    color: 'rgba(47,61,72,1)'
+    color: 'rgba(79,79,79,1)'
   },
   navlinkActiveStyle: {
+    color: 'rgba(79,79,79,1)',
     textDecoration: 'none',
   },
   readableEditorViewStyle: {

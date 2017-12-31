@@ -1,4 +1,4 @@
-const commentHeaderStyles = {
+const contentHeaderStyles = {
   contentHeaderStyle: {
     backgroundColor: 'rgb(28,38,47)',
     boxShadow: 'rgba(0,0,0,0.5) 0px 2px 4px 0px',
@@ -29,8 +29,9 @@ const commentHeaderStyles = {
     textAlign: 'right'
   },
   categoryLabelStyle: {
-    textAlign: 'center'
+    textAlign: 'center',
+    color: 'rgba(255,255,255,.8)'
   }
 }
 
-export { commentHeaderStyles }
+export { contentHeaderStyles }
